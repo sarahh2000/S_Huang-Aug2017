@@ -6,7 +6,7 @@ public class Project2B {
 		System.out.print("HELLO! ");
 		System.out.println("this is stupid");
 		System.out.println("ok bye");
-		//test
+		//test2
 	}
 
 }
