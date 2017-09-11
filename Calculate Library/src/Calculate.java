@@ -86,27 +86,7 @@ public class Calculate {
 	
 	//returns the larger of the values passed (3 values)
 	public static double max(double value1,double value2,double value3) {
-		if(value1>value2&&value1>value3) {
-			return value1;
-			}
-		if(value2>value1&&value2>value3) {
-			return value2;
-			}
-		if(value3>value1&&value3>value2) {
-			return value3;
-			}
-		if(value2==value1&&value1>value3) {
-			return value1;
-			}
-		if(value1==value3&&value3>value2) {
-			return value1;
-			}
-		if(value2==value3&&value2>value1) {
-			return value3;
-		}
-		else {
-			return value1;
-		}
+		return max(max(value1,value2),max(value1,value3));
 	}
 	
 	//returns the smaller of the values passed (2 integers)
@@ -126,8 +106,10 @@ public class Calculate {
 		double times100=value*100;
 		int roundedtimes100=(int)times100;
 		double new100=(double)roundedtimes100/100.0;
+		//truncates all digits past the hundredth place
 		if(value-new100<0.005) {
 			return new100;
+			//tests if the thousandth digit is less than 5
 		}else {
 			return new100+0.01;
 		}
