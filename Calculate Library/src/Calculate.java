@@ -114,6 +114,20 @@ public class Calculate {
 			return new100+0.01;
 		}
 	}
+	
+	//raises a value to a positive integer power
+	public static double exponent(double base, int power) {
+		double result=base;
+		for(int i=1; i<power;i++) {
+			result=result*base;
+		}
+		return result;		
+	}
+	
+	//returns factorial of the value passed
+	public static int factorial (int value) {
+		
+	}
 }
 
 
