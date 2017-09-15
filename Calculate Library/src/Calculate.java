@@ -126,9 +126,21 @@ public class Calculate {
 	
 	//returns factorial of the value passed
 	public static int factorial (int value) {
-		
+		if(value==0) {
+			return 1;
+		}else {
+			int result=value;
+			while ((value-1)>0) {
+				result=result*(value-1);
+				value=value-1;
+			}
+		return result;
+		}
 	}
 }
+	
+	//determines whether or not an integer is prime
+
 
 
 
