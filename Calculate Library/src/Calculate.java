@@ -184,7 +184,8 @@ public class Calculate {
 				squareroot=(var1+(value/var1))/2;
 			}
 			while((var1-squareroot)!=0);
-			return squareroot;
+			double rounded=Calculate.round2(squareroot);
+			return rounded;
 		
 		
 	}
