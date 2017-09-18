@@ -107,13 +107,22 @@ public class Calculate {
 		int roundedtimes100=(int)times100;
 		double new100=(double)roundedtimes100/100.0;
 		//truncates all digits past the hundredth place
-		if(value-new100<0.005) {
-			return new100;
-			//tests if the thousandth digit is less than 5
-		}else {
-			return new100+0.01;
+		if(value>0) {
+			if(value-new100<0.005) {
+				return new100;
+				//tests if the thousandth digit is less than 5
+				}else {
+					return new100+0.01;}
+			}else if(value<0) {
+				if(-value-new100<0.005) {
+					return new100;
+					//tests if the thousandth digit is less than 5
+					}else {
+						return new100-0.01;}
+			}else {
+				return 0;
+			}
 		}
-	}
 	
 	//raises a value to a positive integer power
 	public static double exponent(double base, int power) {
@@ -155,8 +164,8 @@ public class Calculate {
 	//finds the greatest common factor of two integers
 	//use euclidian algorithm
 	public static int gcf(int value1, int value2) {
-		if(value1==0) {
-			return value2;}
+		if(value1==0||value2==0) {
+			return 0;}
 		while (value2!=0) {
 			if (value1>value2) {
 				value1=value1-value2;
@@ -176,7 +185,6 @@ public class Calculate {
 			}
 			while((var1-squareroot)!=0);
 			return squareroot;
-		
 		
 		
 	}
