@@ -137,10 +137,50 @@ public class Calculate {
 		return result;
 		}
 	}
-}
+
 	
 	//determines whether or not an integer is prime
-
-
+	public static boolean isPrime(int value) {
+		int dividend=2;
+		while(Calculate.isDivisibleBy(value,dividend)!=true) {
+			dividend++;
+		}
+		if (dividend==value) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	//finds the greatest common factor of two integers
+	//use euclidian algorithm
+	public static int gcf(int value1, int value2) {
+		if(value1==0) {
+			return value2;}
+		while (value2!=0) {
+			if (value1>value2) {
+				value1=value1-value2;
+			}else {
+				value2=value2-value1;
+			}
+		}
+		return value1;
+	}
+	//approximation of the square root
+	public static double sqrt(double value) {
+		double var1;
+		double squareroot=value/2.0;
+			do {
+				var1=squareroot;
+				squareroot=(var1+(value/var1))/2;
+			}
+			while((var1-squareroot)!=0);
+			return squareroot;
+		
+		
+		
+	}
+		
+}
 
 
