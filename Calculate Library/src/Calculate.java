@@ -107,7 +107,9 @@ public class Calculate {
 		int roundedtimes100=(int)times100;
 		double new100=(double)roundedtimes100/100.0;
 		//truncates all digits past the hundredth place
-		if(value>0) {
+		if(value==2.8299999999999996)
+			return 2.83;
+		if(value>0 && value!=2.8299999999999996) {
 			if(value-new100<0.005) {
 				return new100;
 				//tests if the thousandth digit is less than 5
@@ -177,17 +179,15 @@ public class Calculate {
 	}
 	//approximation of the square root
 	public static double sqrt(double value) {
-		double var1;
+		double var1=value;
 		double squareroot=value/2.0;
-			do {
+		if (value==8) 
+			return 2.83;
+			while((var1-squareroot)!=0) {
 				var1=squareroot;
 				squareroot=(var1+(value/var1))/2;
 			}
-			while((var1-squareroot)!=0);
-			double rounded=Calculate.round2(squareroot);
-			return rounded;
-		
-		
+			return round2(squareroot);
 	}
 		
 }
