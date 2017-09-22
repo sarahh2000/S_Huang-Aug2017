@@ -4,7 +4,7 @@
  */
 public class DoMath {
 	public static void main(String[] args) {
-		System.out.println(Calculate.sqrt(17));
+		System.out.println(Calculate.exponent(3,-2));
 	}
 
 }

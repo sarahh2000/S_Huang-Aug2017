@@ -103,40 +103,38 @@ public class Calculate {
 	
 	//rounds a double correctly to 2 decimal places
 	public static double round2(double value) {
-		double times100=value*100;
-		int roundedtimes100=(int)times100;
-		double new100=(double)roundedtimes100/100.0;
-		//truncates all digits past the hundredth place
-		if(value==2.8299999999999996)
-			return 2.83;
-		if(value>0 && value!=2.8299999999999996) {
-			if(value-new100<0.005) {
-				return new100;
-				//tests if the thousandth digit is less than 5
-				}else {
-					return new100+0.01;}
-			}else if(value<0) {
-				if(-value-new100<0.005) {
-					return new100;
-					//tests if the thousandth digit is less than 5
-					}else {
-						return new100-0.01;}
-			}else {
-				return 0;
+			int tempInt = (int) (value *1000);
+			int roundNum = tempInt % 10;
+			tempInt = tempInt / 10;
+			if(roundNum >=5) {
+				tempInt++;
+			}else if(roundNum <= -5){
+				tempInt--;
 			}
+			return tempInt/100.0;
 		}
 	
 	//raises a value to a positive integer power
 	public static double exponent(double base, int power) {
 		double result=base;
-		for(int i=1; i<power;i++) {
-			result=result*base;
+		if(power==0) {
+			return 1;
+		}else if(power>0){
+			for(int i=1; i<power;i++) {
+				result=result*base;
+			}
+		}else {
+			result=1/base;
+			for(int i=1; i<power; i++) {
+				result=result*(1/base);
+			}
 		}
 		return result;		
 	}
 	
 	//returns factorial of the value passed
 	public static int factorial (int value) {
+		if(value<0) throw new IllegalArgumentException ("cannot have negative factorial");
 		if(value==0) {
 			return 1;
 		}else {
@@ -181,8 +179,6 @@ public class Calculate {
 	public static double sqrt(double value) {
 		double var1=value;
 		double squareroot=value/2.0;
-		if (value==8) 
-			return 2.83;
 			while((var1-squareroot)!=0) {
 				var1=squareroot;
 				squareroot=(var1+(value/var1))/2;
