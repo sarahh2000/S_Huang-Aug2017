@@ -59,6 +59,7 @@ public class Calculate {
 	
 	//determines whether or not one integer is evenly divisible by another
 	public static boolean isDivisibleBy(int divisor,int dividend) {
+		if(dividend==0) throw new IllegalArgumentException("cannot divide by 0");
 		if (divisor%dividend==0) {
 			return true;
 		}else {
@@ -116,17 +117,15 @@ public class Calculate {
 	
 	//raises a value to a positive integer power
 	public static double exponent(double base, int power) {
+		if(power<0)throw new IllegalArgumentException("negative power doesn't work for this algorithm");
 		double result=base;
-		if(power==0) {
+		if(power==0&&base!=0) {
 			return 1;
+		}else if(base==0) {
+			return 0;
 		}else if(power>0){
 			for(int i=1; i<power;i++) {
 				result=result*base;
-			}
-		}else {
-			result=1/base;
-			for(int i=1; i<power; i++) {
-				result=result*(1/base);
 			}
 		}
 		return result;		
@@ -177,6 +176,7 @@ public class Calculate {
 	}
 	//approximation of the square root
 	public static double sqrt(double value) {
+		if(value<0)throw new IllegalArgumentException ("cannot take a negative root");
 		double var1=value;
 		double squareroot=value/2.0;
 			while((var1-squareroot)!=0) {
@@ -184,6 +184,36 @@ public class Calculate {
 				squareroot=(var1+(value/var1))/2;
 			}
 			return round2(squareroot);
+	}
+	
+	//uses the coefficients of a quadratic formula in standard form to approximate real roots
+	public static String quadForm(int a,int b,int c) {
+		double discriminant=discriminant(a,b,c);
+		double result;
+		if(discriminant<0) {
+			return "no real roots";
+		}else if(discriminant==0) {
+			result= (-b)/(2*a);
+			return round2(result)+"";
+		}else {
+			double root1=((-b)+sqrt(discriminant))/(2*a);
+			double root2=((-b)-sqrt(discriminant))/(2*a);
+			double smallerNumber=min(root1,root2);
+			double largerNumber=max(root1,root2);
+			return round2(smallerNumber)+" and "+round2(largerNumber);
+		}
+	}
+
+	private static double min(double root1, double root2) {
+		if(root1<root2) {
+			return root1;
+		}
+		if(root2<root1) {
+			return root2;
+		}else {
+			return root1;
+	}
+
 	}
 		
 }
