@@ -205,7 +205,7 @@ public class Calculate {
 	}
 
 	//double version of min for use in quadform
-	private static double min(double root1, double root2) {
+	public static double min(double root1, double root2) {
 		if(root1<root2) {
 			return root1;
 		}
