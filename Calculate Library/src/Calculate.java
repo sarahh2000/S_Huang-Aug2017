@@ -104,12 +104,12 @@ public class Calculate {
 	
 	//rounds a double correctly to 2 decimal places
 	public static double round2(double value) {
-			int tempInt = (int) (value *1000);
+			int tempInt = (int) (value*1000);
 			int roundNum = tempInt % 10;
-			tempInt = tempInt / 10;
-			if(roundNum >=5) {
+			tempInt = tempInt/10;
+			if(roundNum>=5) {
 				tempInt++;
-			}else if(roundNum <= -5){
+			}else if(roundNum<= -5){
 				tempInt--;
 			}
 			return tempInt/100.0;
@@ -204,6 +204,7 @@ public class Calculate {
 		}
 	}
 
+	//double version of min for use in quadform
 	private static double min(double root1, double root2) {
 		if(root1<root2) {
 			return root1;
