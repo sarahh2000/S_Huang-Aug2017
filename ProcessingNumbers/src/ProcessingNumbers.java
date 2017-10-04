@@ -8,6 +8,7 @@ public class ProcessingNumbers {
 		boolean done=true;
 		boolean isFirstNum=true;
 		int nextNum;
+		int largestEven=0;
 		String completed;
 		int min=0;
 		int max=0;
@@ -23,18 +24,22 @@ public class ProcessingNumbers {
 				min=nextNum;
 				max=nextNum;
 				isFirstNum=false;
-			}else{
+			}if(!isFirstNum) {
 				if(nextNum<min) {
 					min=nextNum;
 				}if(nextNum>max) {
 					max=nextNum;
 				}if(nextNum%2==0) {
 					sum+=nextNum;
-				}		
+				}
+				if(max%2==0) {
+					largestEven=max;
+				}
 			}
 		}while(done);
 		System.out.println("The maximum is: "+max);
 		System.out.println("The minimum is: "+min);
+		System.out.println("The largest even number is: "+largestEven);
 		System.out.println("The sum of all even numbers is: "+sum);
 	}
 }
