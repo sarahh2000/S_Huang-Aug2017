@@ -7,6 +7,7 @@ public class ProcessingNumbers {
 		Scanner userInput=new Scanner(System.in);
 		boolean done=true;
 		boolean isFirstNum=true;
+		boolean isFirstEven=true;
 		int nextNum;
 		int largestEven=0;
 		String completed;
@@ -16,7 +17,7 @@ public class ProcessingNumbers {
 		do {
 			System.out.println("Type an integer.");
 			nextNum=userInput.nextInt();
-			System.out.println("Are you done yet? Type yes or no");
+			System.out.println("Are you done yet? If so type yes.");
 			completed=userInput.next(); 
 			if(completed.equals("yes"))
 				done=false;
@@ -31,9 +32,13 @@ public class ProcessingNumbers {
 					max=nextNum;
 				}if(nextNum%2==0) {
 					sum+=nextNum;
-				}
-				if(max%2==0) {
-					largestEven=max;
+				}if(isFirstEven) {
+					largestEven=0;
+					isFirstEven=false;
+				}if(!isFirstEven) {
+					if(nextNum>largestEven&&nextNum%2==0) {
+						largestEven=nextNum;
+					}
 				}
 			}
 		}while(done);
