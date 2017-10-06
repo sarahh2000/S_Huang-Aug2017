@@ -11,6 +11,8 @@ public class Quadratic {
 			return root2;
 		}else {
 			return root1;
+		}
+	}
 	//returns the larger of the values passed (2 values)
 	public static double max(double value1,double value2) {
 		if(value1>value2) {
@@ -73,17 +75,21 @@ public class Quadratic {
 		}else {
 			return "the graph is linear";
 		}
+	//returns the axis of symmetry
+	public static double axisofsymmetry(double a, double b) {
+		double axis;
+		axis=-b/(2a);		
+		}	
 	//calculates the vertex of the quadratic
 	public static String vertex(double a,double b,double c) {
-		double Vx;
-		double Vy;
-		Vx= (-b)/(2a);
-		Vy= a*Vx*Vx+b*Vx+c;
-		return "("+Vx+" , "+Vy+")";
+		double vx;
+		double vy;
+		vx= (-b)/(2a);
+		vy= a*vx*vx+b*vx+c;
+		return "("+vx+" , "+vy+")";
 		}
 	//calculates the x-ints of the quadratic
 	public static String xInts(double a, double b, double c) {
 		quadForm(a,b,c);
-	}
 	}	
 }
