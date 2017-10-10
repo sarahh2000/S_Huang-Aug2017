@@ -7,11 +7,11 @@ public class Quadratic {
 		String result="";
 		result+="Description of the graph of: \ny= "+a+"x^2 + "+b+"x + "+c+"\n";
 		result+="\n";
-		result+=Quadratic.direction(a)+"\n";
-		result+=Quadratic.axisofsymmetry(a, b)+"\n";
-		result+=Quadratic.vertex(a, b, c)+"\n";
-		result+=Quadratic.xInts(a, b, c)+"\n";
-		result+=Quadratic.yInt(c);
+		result+=direction(a)+"\n";
+		result+=axisofsymmetry(a, b)+"\n";
+		result+=vertex(a, b, c)+"\n";
+		result+=xInts(a, b, c)+"\n";
+		result+=yInt(c);
 		return result;
 	}
 	//double version of min for use in quadform
