@@ -7,18 +7,14 @@ public class QuadraticClient {
 		boolean done=true;
 		while(done) {
 			Scanner userInput= new Scanner(System.in); 
-			System.out.println("Type in the coefficient in front of x^2.");
+			System.out.print("a: ");
 			double a=userInput.nextDouble();
-			System.out.println("Type in the coeffcient in front of x.");
+			System.out.print("b: ");
 			double b=userInput.nextDouble();
-			System.out.println("Type in the last coefficient (the constant).");
+			System.out.print("c: ");
 			double c=userInput.nextDouble();
-			System.out.println(Quadratic.direction(a));
-			System.out.println(Quadratic.axisofsymmetry(a, b));
-			System.out.println(Quadratic.vertex(a, b, c));
-			System.out.println(Quadratic.xInts(a, b, c));
-			System.out.println(Quadratic.yInt(c));
-			System.out.println("Are you done yet? If yes, type \"quit\". If no, type \"no\".");
+			System.out.println(Quadratic.quadrDescriber(a, b, c));
+			System.out.println("Do you want to keep going? (Type \"quit\" to end)");
 			String quit=userInput.next();
 			if(quit.substring(0,1).equals("q")) {
 				done=false;

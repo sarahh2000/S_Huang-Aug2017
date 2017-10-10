@@ -2,6 +2,18 @@
 //Sept 27 2017
 //responsible for all of the calculations for QuadraticDescriber
 public class Quadratic {
+	//describes the quadratic equation 
+	public static String quadrDescriber(double a, double b, double c) {
+		String result="";
+		result+="Description of the graph of: \ny= "+a+"x^2 + "+b+"x + "+c+"\n";
+		result+="\n";
+		result+=Quadratic.direction(a)+"\n";
+		result+=Quadratic.axisofsymmetry(a, b)+"\n";
+		result+=Quadratic.vertex(a, b, c)+"\n";
+		result+=Quadratic.xInts(a, b, c)+"\n";
+		result+=Quadratic.yInt(c);
+		return result;
+	}
 	//double version of min for use in quadform
 	public static double min(double root1, double root2) {
 		if(root1<root2) {
@@ -78,31 +90,31 @@ public class Quadratic {
 	}
 	//calculates the axis of symmetry
 	public static String axisofsymmetry(double a,double b) {
-		return "Axis of Symmetry: x= "+(-b)/(2*a);
+		return "Axis of Symmetry: "+round2((-b)/(2*a));
 	}
 	//calculates the vertex of the quadratic
 	public static String vertex(double a,double b,double c) {
 		double vx;
 		double vy;
-		vx= (-b)/(2*a);
-		vy= a*vx*vx+b*vx+c;
+		vx= round2((-b)/(2*a));
+		vy= round2(a*vx*vx+b*vx+c);
 		return "Vertex: ("+vx+" , "+vy+")";
 		}
 	//calculates the x-ints of the quadratic
 	public static String xInts(double a, double b, double c) {
 		String quadform=quadForm(a,b,c);
 		if(discriminant(a,b,c)<0) {
-			return "X-intercepts: No x-intercepts";
+			return "X-intercepts: None";
 		}else if(discriminant(a,b,c)==0){
-			return "X-intercept: ("+quadform+", 0)";
+			return "X-intercept: "+quadform;
 		}else{
 			String firstnumber=quadform.substring(0,quadform.indexOf("a")-1);
 			String secondnumber=quadform.substring(quadform.indexOf("d")+2);
-			return "X-intercepts: ("+firstnumber+", 0), ("+secondnumber+", 0)";
+			return "X-intercepts: "+firstnumber+" and "+secondnumber;
 		}
 	}
 	//calculates the y-intercepts 
 	public static String yInt(double c) {
-		return "Y-intercepts: (0, "+c+")";
+		return "Y-intercepts: "+c;
 	}
 }
