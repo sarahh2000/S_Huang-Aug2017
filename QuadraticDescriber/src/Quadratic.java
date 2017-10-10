@@ -115,6 +115,6 @@ public class Quadratic {
 	}
 	//calculates the y-intercepts 
 	public static String yInt(double c) {
-		return "Y-intercepts: "+c;
+		return "Y-intercepts: "+round2(c);
 	}
 }
