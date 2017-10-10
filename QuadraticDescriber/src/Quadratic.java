@@ -103,15 +103,7 @@ public class Quadratic {
 	//calculates the x-ints of the quadratic
 	public static String xInts(double a, double b, double c) {
 		String quadform=quadForm(a,b,c);
-		if(discriminant(a,b,c)<0) {
-			return "X-intercepts: None";
-		}else if(discriminant(a,b,c)==0){
-			return "X-intercept: "+quadform;
-		}else{
-			String firstnumber=quadform.substring(0,quadform.indexOf("a")-1);
-			String secondnumber=quadform.substring(quadform.indexOf("d")+2);
-			return "X-intercepts: "+firstnumber+" and "+secondnumber;
-		}
+		return "X-intercept: "+quadform;
 	}
 	//calculates the y-intercepts 
 	public static String yInt(double c) {
