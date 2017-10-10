@@ -1,6 +1,6 @@
 //Sarah Huang
 //Sept 27 2017
-//responsible for all of the calculations for QuadraticDescriber
+//responsible for all of the calculations for Quadratic Describer
 public class Quadratic {
 	//double version of min for use in quadform
 	public static double min(double root1, double root2) {
