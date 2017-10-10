@@ -78,7 +78,7 @@ public class Quadratic {
 	}
 	//calculates the axis of symmetry
 	public static String axisofsymmetry(double a,double b) {
-		return "x= "+(-b)/(2*a);
+		return "Axis of Symmetry: x= "+(-b)/(2*a);
 	}
 	//calculates the vertex of the quadratic
 	public static String vertex(double a,double b,double c) {
