@@ -11,6 +11,8 @@ public class Quadratic {
 			return root2;
 		}else {
 			return root1;
+		}
+	}
 	//returns the larger of the values passed (2 values)
 	public static double max(double value1,double value2) {
 		if(value1>value2) {
@@ -48,11 +50,11 @@ public class Quadratic {
 			return round2(squareroot);
 	}
 	//calculates the roots of the quadratic
-	public static String quadForm(int a,int b,int c) {
+	public static String quadForm(double a,double b,double c) {
 		double discriminant=discriminant(a,b,c);
 		double result;
 		if(discriminant<0) {
-			return "no x-intercepts";
+			return "No x-intercepts";
 		}else if(discriminant==0) {
 			result= (-b)/(2*a);
 			return round2(result)+"";
@@ -67,23 +69,40 @@ public class Quadratic {
 	//returns the direction of the quadratic
 	public static String direction(double a) {
 		if(a>0) {
-			return "opens up";
+			return "Opens: Up";
 		}else if(a<0) {
-			return "opens down";
+			return "Opens:Down";
 		}else {
-			return "the graph is linear";
+			return "The graph is linear";
 		}
+	}
+	//calculates the axis of symmetry
+	public static String axisofsymmetry(double a,double b) {
+		return "x= "+(-b)/(2*a);
+	}
 	//calculates the vertex of the quadratic
 	public static String vertex(double a,double b,double c) {
-		double Vx;
-		double Vy;
-		Vx= (-b)/(2a);
-		Vy= a*Vx*Vx+b*Vx+c;
-		return "("+Vx+" , "+Vy+")";
+		double vx;
+		double vy;
+		vx= (-b)/(2*a);
+		vy= a*vx*vx+b*vx+c;
+		return "Vertex: ("+vx+" , "+vy+")";
 		}
 	//calculates the x-ints of the quadratic
 	public static String xInts(double a, double b, double c) {
-		quadForm(a,b,c);
+		String quadform=quadForm(a,b,c);
+		if(discriminant(a,b,c)<0) {
+			return "X-intercepts: No x-intercepts";
+		}else if(discriminant(a,b,c)==0){
+			return "X-intercept: ("+quadform+", 0)";
+		}else{
+			String firstnumber=quadform.substring(0,quadform.indexOf("a")-1);
+			String secondnumber=quadform.substring(quadform.indexOf("d")+2);
+			return "X-intercepts: ("+firstnumber+", 0), ("+secondnumber+", 0)";
+		}
 	}
-	}	
+	//calculates the y-intercepts 
+	public static String yInt(double c) {
+		return "Y-intercepts: (0, "+c+")";
+	}
 }
