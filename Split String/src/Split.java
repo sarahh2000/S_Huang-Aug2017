@@ -10,7 +10,7 @@ public class Split {
 		System.out.println(Arrays.toString("I reallyreallyreally likeapples".split("really")));
 		System.out.println(Arrays.toString("reallyI reallyreally likeapples".split("really")));
 		System.out.println(Arrays.toString("I reallyreally likeapples really".split("really")));
-		System.out.println(Arrays.toString("breadcheesebreadhammayobread".split("bread")));
+		System.out.println(Arrays.toString("breadbreadbreadbread".split("bread")));
 		System.out.println(getFilling("breadapplespineapplesbreadlettucetomatobreadbaconmayohambreadcheese"));
 		System.out.println(spaceGetFilling("bread apples pineapples bread lettuce tomato bread bacon mayo ham bread cheese"));
 		System.out.println(getFilling("cheesebreadhammayobread"));
