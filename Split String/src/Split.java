@@ -12,25 +12,34 @@ public class Split {
 		System.out.println(Arrays.toString("I reallyreally likeapples really".split("really")));
 		System.out.println(getFilling("breadapplespineapplesbreadlettucetomatobreadbaconmayohambreadcheese"));
 		System.out.println(spaceGetFilling("bread apples pineapples bread lettuce tomato bread bacon mayo ham bread cheese"));
+		System.out.println(getFilling("hammayobread"));
 	}
 	
 	//part one
-	public static String getFilling (String filling) {
-		String insides="";
-		String[] array=filling.split("bread");
-		for(int i=1;i<array.length-1;i++) {
-			insides+=array[i];
+	public static String getFilling (String everything) {
+		if(everything.indexOf("bread")<0||everything.equals("bread")) {
+			return "not a sandwich";
+		}else {
+			String insides="";
+			String[] array=everything.split("bread");
+			for(int i=1;i<array.length-1;i++) {
+				insides+=array[i];
+			}
+			if(insides.equals("")) {
+				return "not a sandwich";
+			}else {
+				return insides;
+			}
 		}
-		return insides;
 	}
 	
 	//part two
-	public static String spaceGetFilling (String filling) {
-		String everything="";
-		String []array=filling.split(" ");
+	public static String spaceGetFilling (String everything) {
+		String getFillingString="";
+		String []array=everything.split(" ");
 		for(int i=0;i<array.length;i++) {
-			everything+=array[i];
+			getFillingString+=array[i];
 		}
-		return getFilling(everything);
+		return getFilling(getFillingString);
 	}
 }
