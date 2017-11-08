@@ -1,4 +1,6 @@
-
+//Sarah Huang
+//APCS2
+//Nov 8 2017
 public class Magpie2 {
 
 	//Get a default greeting and return a greeting	

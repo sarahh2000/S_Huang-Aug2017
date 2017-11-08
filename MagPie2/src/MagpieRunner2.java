@@ -1,3 +1,6 @@
+//Sarah Huang
+//APCS2
+//Nov 8 2017
 import java.util.Scanner;
 
 //A simple class to run the Magpie class.
