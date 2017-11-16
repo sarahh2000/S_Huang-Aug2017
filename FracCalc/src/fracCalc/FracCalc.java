@@ -55,7 +55,7 @@ public class FracCalc {
     }
     public static String addSubtract(int[] operand1, int[] operand2, String operator) {
     	commonDenominator(improperFrac(operand1), improperFrac(operand2));
-    	//finish
+    	//finish addsubtract
     	
     }
     public static int[] improperFrac(int[]fraction) {
