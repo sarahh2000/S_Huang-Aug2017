@@ -5,6 +5,7 @@
 
 package fracCalc;
 import java.util.*;
+import java.util.Arrays;
 
 public class FracCalc {
 
@@ -28,8 +29,19 @@ public class FracCalc {
     	String firstOperand=inputArray[0];
     	String operator=inputArray[1];
     	String secondOperand=inputArray[2];
-    	parseValues(firstOperand);
-    	return parseValues(secondOperand);
+    	if(firstOperand.equals("")||secondOperand.equals("")) {
+    		return "cannot compute";
+    	}
+    	else {
+    		int[] operand1Array=parseValues(firstOperand);
+        	int[] operand2Array=parseValues(secondOperand);
+        	if(operator.equals("+")||operator.equals("-")) {
+        		return addSubtract(operand1Array, operand2Array, operator);
+        	}else {
+        		return multiplyDivide(operand1Array, operand2Array, operator);
+        	}
+    	}
+    	
     }
     public static int[] parseValues(String input) {
     	String [] underscoreSplit=input.split("_");
@@ -54,16 +66,45 @@ public class FracCalc {
     	return parsedInputArray;
     }
     public static String addSubtract(int[] operand1, int[] operand2, String operator) {
-    	commonDenominator(improperFrac(operand1), improperFrac(operand2));
-    	//finish addsubtract
-    	
+    	int [] improperFrac1=improperFrac(operand1);
+    	int [] improperFrac2=improperFrac(operand2);
+    	int denominator1=improperFrac1[1];
+    	int denominator2=improperFrac2[1];
+    	improperFrac1[0]*=denominator2;
+    	improperFrac1[1]*=denominator2;
+    	improperFrac2[0]*=denominator1;
+    	improperFrac2[1]*=denominator1;
+    	int[] result= new int [2];
+    	if(operator.equals("+")) {
+    		result[0]=improperFrac1[0]+improperFrac2[0];
+    	}else {
+    		result[0]=improperFrac1[0]-improperFrac2[0];
+    	}
+    	result[1]=improperFrac1[1];
+    	return result[0]+"/"+result[1]; 	
     }
+    
+    public static String multiplyDivide(int[] operand1, int[] operand2, String operator) {
+    	int [] improperFrac1=improperFrac(operand1);
+    	int [] improperFrac2=improperFrac(operand2);
+
+    	int[] result= new int [2];
+    	if(operator.equals("/")) {
+    		int temp=improperFrac2[0];
+    		improperFrac2[0]=improperFrac2[1];
+    		improperFrac2[1]=temp;
+    	}
+    	result[0]=improperFrac1[0]*improperFrac2[0];
+    	result[1]=improperFrac1[1]*improperFrac2[1];
+    	return result[0]+"/"+result[1];
+    }
+    
     public static int[] improperFrac(int[]fraction) {
     	int[]improper=new int[2];
     	if(fraction[0]!=0) {
     		improper[1]=fraction[2];
     		if(fraction[0]<0) {
-    			improper[0]=(-1)*fraction[0]*fraction[2]+fraction[1];
+    			improper[0]=(((-1)*fraction[0]*fraction[2])+fraction[1])*(-1);
     		}else {
     			improper[0]=fraction[0]*fraction[2]+fraction[1];
     		}
@@ -76,14 +117,7 @@ public class FracCalc {
     	}
     	return improper;
     }
-    public static void commonDenominator(int[]operand1, int[] operand2) {
-    	int denominator1=operand1[1];
-    	int denominator2=operand2[2];
-    	operand1[0]*=denominator2;
-    	operand1[1]*=denominator2;
-    	operand2[0]*=denominator1;
-    	operand2[1]*=denominator1;
-    }
+
     // TODO: Fill in the space below with any helper methods that you think you will need
     
 }
