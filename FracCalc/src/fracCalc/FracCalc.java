@@ -43,6 +43,7 @@ public class FracCalc {
     	}
     	
     }
+    
     public static int[] parseValues(String input) {
     	String [] underscoreSplit=input.split("_");
     	String [] slashSplit=input.split("/");
