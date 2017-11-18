@@ -30,20 +30,28 @@ public class FracCalc {
     	String firstOperand=inputArray[0];
     	String operator=inputArray[1];
     	String secondOperand=inputArray[2];
-    	if((firstOperand.equals("0")||secondOperand.equals("0"))&&(operator.equals("*")||operator.equals("/"))) {
-    		return "0";
-    	}
-    	else {
-    		int[] operand1Array=parseValues(firstOperand);
-        	int[] operand2Array=parseValues(secondOperand);
-        	if(operator.equals("+")||operator.equals("-")) {
+
+    	int[] operand1Array=parseValues(firstOperand);
+        int[] operand2Array=parseValues(secondOperand);
+        if(operator.equals("+")||operator.equals("-")) {
+        	if(firstOperand.equals("0")) {
+        		return secondOperand;
+        	}else if(secondOperand.equals("0")) {
+        		return firstOperand;
+        	}else {
         		return addSubtract(operand1Array, operand2Array, operator);
+        	}
+        	
+        }else {
+        	if(firstOperand.equals("0")||secondOperand.equals("0")) {
+        		return "0";
         	}else {
         		return multiplyDivide(operand1Array, operand2Array, operator);
         	}
-    	}
-    	
+        	
+        }
     }
+    	
     
     public static int[] parseValues(String input) {
     	String [] underscoreSplit=input.split("_");
@@ -121,8 +129,8 @@ public class FracCalc {
     	int greatestFactor=gcf(numerator, denominator);
 		numerator/=greatestFactor;
 		denominator/=greatestFactor;
-		if(numerator==0) {
-			return whole+"";
+		if(numerator%denominator==0) {
+			return numerator+"";
 		}else {
 			if(improperFrac[0]>=improperFrac[1]) {
     		whole=improperFrac[0]/improperFrac[1];
