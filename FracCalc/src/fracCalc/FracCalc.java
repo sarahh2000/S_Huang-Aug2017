@@ -25,12 +25,13 @@ public class FracCalc {
     	}
     }
     public static String produceAnswer(String input){
+    	
     	String [] inputArray=input.split(" ");
     	String firstOperand=inputArray[0];
     	String operator=inputArray[1];
     	String secondOperand=inputArray[2];
-    	if(firstOperand.equals("")||secondOperand.equals("")) {
-    		return "cannot compute";
+    	if((firstOperand.equals("0")||secondOperand.equals("0"))&&(operator.equals("*")||operator.equals("/"))) {
+    		return "0";
     	}
     	else {
     		int[] operand1Array=parseValues(firstOperand);
@@ -82,7 +83,7 @@ public class FracCalc {
     		result[0]=improperFrac1[0]-improperFrac2[0];
     	}
     	result[1]=improperFrac1[1];
-    	return result[0]+"/"+result[1]; 	
+    	return simplifyFrac(result); 	
     }
     
     public static String multiplyDivide(int[] operand1, int[] operand2, String operator) {
@@ -97,9 +98,42 @@ public class FracCalc {
     	}
     	result[0]=improperFrac1[0]*improperFrac2[0];
     	result[1]=improperFrac1[1]*improperFrac2[1];
-    	return result[0]+"/"+result[1];
+    	return simplifyFrac(result);
     }
     
+    public static int gcf(int value1, int value2) {
+		if(value1==0||value2==0) {
+			return 0;}
+		while (value2!=0) {
+			if (value1>value2) {
+				value1=value1-value2;
+			}else {
+				value2=value2-value1;
+			}
+		}
+		return value1;
+	}
+   
+    public static String simplifyFrac(int[]improperFrac) {
+    	int whole=0;
+    	int numerator=improperFrac[0];
+    	int denominator=improperFrac[1];
+    	int greatestFactor=gcf(numerator, denominator);
+		numerator/=greatestFactor;
+		denominator/=greatestFactor;
+		if(numerator==0) {
+			return whole+"";
+		}else {
+			if(improperFrac[0]>=improperFrac[1]) {
+    		whole=improperFrac[0]/improperFrac[1];
+    		numerator=improperFrac[0]-whole*improperFrac[1];
+    		
+    			return whole+"_"+numerator+"/"+denominator;
+    		}else {
+    			return numerator+"/"+denominator;
+    		}
+		}
+    }
     public static int[] improperFrac(int[]fraction) {
     	int[]improper=new int[2];
     	if(fraction[0]!=0) {
