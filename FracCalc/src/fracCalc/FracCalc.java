@@ -91,6 +91,8 @@ public class FracCalc {
     		result[0]=improperFrac1[0]-improperFrac2[0];
     	}
     	result[1]=improperFrac1[1];
+    	System.out.println(Arrays.toString(result));
+    	System.out.println(simplifyFrac(result));
     	return simplifyFrac(result); 	
     }
     
@@ -129,7 +131,7 @@ public class FracCalc {
     	int greatestFactor=gcf(numerator, denominator);
 		numerator/=greatestFactor;
 		denominator/=greatestFactor;
-		if(numerator%denominator==0) {
+		if(absValue(numerator)%denominator==0) {
 			return numerator+"";
 		}else {
 			if(improperFrac[0]>=improperFrac[1]) {
@@ -160,7 +162,14 @@ public class FracCalc {
     	}
     	return improper;
     }
-
+    
+    public static double absValue(double operand) {
+		if(operand>=0) {
+			return operand;
+		}else {
+			return -operand;
+		}
+	}
     // TODO: Fill in the space below with any helper methods that you think you will need
     
 }

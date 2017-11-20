@@ -34,14 +34,14 @@ public class FracCalcTestFinal
     @Test public void testAdditionImproperFractionsAndReductions2() {assertEquals("1_1/20", FracCalc.produceAnswer("4/5 + 2/8"));}
     
         // This unit test tries a number of combined concepts
-    @Test public void testAdditionCombined1() { assertEquals("-9035", FracCalc.produceAnswer("-9035 + 0"));}
-    @Test public void testAdditionCombined2() {     assertEquals("-64", FracCalc.produceAnswer("64 + -128"));}
-    @Test public void testAdditionCombined3() {         assertEquals("-133", FracCalc.produceAnswer("-98 + -35"));}
-    @Test public void testAdditionCombined4() { assertEquals("62_11/19", FracCalc.produceAnswer("0 + 34_543/19"));}
-    @Test public void testAdditionCombined5() { assertEquals("-44_229/888", FracCalc.produceAnswer("-38_3/72 + -4_82/37"));}
+    @Test public void testAdditionCombined1() {assertEquals("-9035", FracCalc.produceAnswer("-9035 + 0"));}
+    @Test public void testAdditionCombined2() {assertEquals("-64", FracCalc.produceAnswer("64 + -128"));}
+    @Test public void testAdditionCombined3() {assertEquals("-133", FracCalc.produceAnswer("-98 + -35"));}
+    @Test public void testAdditionCombined4() {assertEquals("62_11/19", FracCalc.produceAnswer("0 + 34_543/19"));}
+    @Test public void testAdditionCombined5() {assertEquals("-44_229/888", FracCalc.produceAnswer("-38_3/72 + -4_82/37"));}
     
     
-    @Test public void testSubtractionSimple1() {        assertEquals("1/5", FracCalc.produceAnswer("3/5 - 2/5"));}
+    @Test public void testSubtractionSimple1() {assertEquals("1/5", FracCalc.produceAnswer("3/5 - 2/5"));}
     @Test public void testSubtractionSimple2() {assertEquals("0", FracCalc.produceAnswer("1/5 - 1/5"));}
     @Test public void testSubtractionSimple3() {assertEquals("0", FracCalc.produceAnswer("4_1/2 - 4_1/2"));}
         
