@@ -131,10 +131,10 @@ public class FracCalc {
     	int greatestFactor=gcf(numerator, denominator);
 		numerator/=greatestFactor;
 		denominator/=greatestFactor;
-		if(absValue(numerator)%denominator==0) {
+		if(absValue(numerator)%absValue(denominator)==0) {
 			return numerator+"";
 		}else {
-			if(improperFrac[0]>=improperFrac[1]) {
+			if(absValue(improperFrac[0])>=absValue(improperFrac[1])) {
     		whole=improperFrac[0]/improperFrac[1];
     		numerator=improperFrac[0]-whole*improperFrac[1];
     		
