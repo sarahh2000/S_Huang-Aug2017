@@ -35,9 +35,9 @@ public class FracCalc {
         int[] operand2Array=parseValues(secondOperand);
         if(operator.equals("+")||operator.equals("-")) {
         	if(firstOperand.equals("0")) {
-        		return secondOperand;
+        		return simplifyFrac(improperFrac(operand2Array));
         	}else if(secondOperand.equals("0")) {
-        		return firstOperand;
+        		return simplifyFrac(improperFrac(operand1Array));
         	}else {
         		return addSubtract(operand1Array, operand2Array, operator);
         	}
@@ -46,11 +46,11 @@ public class FracCalc {
         	if(firstOperand.equals("0")||secondOperand.equals("0")) {
         		return "0";
         	}else {
-        		return multiplyDivide(operand1Array, operand2Array, operator);
+        	return multiplyDivide(operand1Array, operand2Array, operator);
         	}
-        	
         }
     }
+        
     	
     
     public static int[] parseValues(String input) {
@@ -91,9 +91,7 @@ public class FracCalc {
     		result[0]=improperFrac1[0]-improperFrac2[0];
     	}
     	result[1]=improperFrac1[1];
-    	System.out.println(Arrays.toString(result));
-    	System.out.println(simplifyFrac(result));
-    	return simplifyFrac(result); 	
+       	return simplifyFrac(result); 	
     }
     
     public static String multiplyDivide(int[] operand1, int[] operand2, String operator) {
@@ -108,6 +106,7 @@ public class FracCalc {
     	}
     	result[0]=improperFrac1[0]*improperFrac2[0];
     	result[1]=improperFrac1[1]*improperFrac2[1];
+    	System.out.println(Arrays.toString(result));
     	return simplifyFrac(result);
     }
     
@@ -128,16 +127,28 @@ public class FracCalc {
     	int whole=0;
     	int numerator=improperFrac[0];
     	int denominator=improperFrac[1];
-    	int greatestFactor=gcf(numerator, denominator);
+    	int greatestFactor=gcf(absValue(numerator), absValue(denominator));
 		numerator/=greatestFactor;
 		denominator/=greatestFactor;
+		if(numerator<0&&denominator<0) {
+			numerator=absValue(numerator);
+			denominator=absValue(denominator);
+		}
 		if(absValue(numerator)%absValue(denominator)==0) {
-			return numerator+"";
+			if((numerator<0&&denominator>0)||(numerator>0&&denominator<0)) {
+				return (-1)*absValue(numerator)+"";
+			}else {
+				return numerator+"";
+			}
+			
 		}else {
-			if(absValue(improperFrac[0])>=absValue(improperFrac[1])) {
-    		whole=improperFrac[0]/improperFrac[1];
-    		numerator=improperFrac[0]-whole*improperFrac[1];
-    		
+			if(absValue(improperFrac[0])>absValue(improperFrac[1])) {
+				whole=numerator/denominator;
+				if(improperFrac[0]>0) {
+					numerator=numerator-whole*denominator;
+				}else {
+					numerator=absValue(numerator)-absValue(whole*denominator);
+				}
     			return whole+"_"+numerator+"/"+denominator;
     		}else {
     			return numerator+"/"+denominator;
@@ -148,7 +159,7 @@ public class FracCalc {
     	int[]improper=new int[2];
     	if(fraction[0]!=0) {
     		improper[1]=fraction[2];
-    		if(fraction[0]<0) {
+    		if((fraction[0]<0&&fraction[1]>0)||(fraction[0]>0&&fraction[1]<0) {
     			improper[0]=(((-1)*fraction[0]*fraction[2])+fraction[1])*(-1);
     		}else {
     			improper[0]=fraction[0]*fraction[2]+fraction[1];
@@ -163,7 +174,7 @@ public class FracCalc {
     	return improper;
     }
     
-    public static double absValue(double operand) {
+    public static int absValue(int operand) {
 		if(operand>=0) {
 			return operand;
 		}else {
