@@ -30,12 +30,15 @@ public class FracCalc {
     	String firstOperand=inputArray[0];
     	String operator=inputArray[1];
     	String secondOperand=inputArray[2];
-
     	int[] operand1Array=parseValues(firstOperand);
         int[] operand2Array=parseValues(secondOperand);
         if(operator.equals("+")||operator.equals("-")) {
         	if(firstOperand.equals("0")) {
-        		return simplifyFrac(improperFrac(operand2Array));
+        		if(operator.equals("+")) {
+        			return simplifyFrac(improperFrac(operand2Array));
+        		}else {
+        			return "-"+simplifyFrac(improperFrac(operand2Array));
+        		}
         	}else if(secondOperand.equals("0")) {
         		return simplifyFrac(improperFrac(operand1Array));
         	}else {
@@ -43,11 +46,8 @@ public class FracCalc {
         	}
         	
         }else {
-        	if(firstOperand.equals("0")||secondOperand.equals("0")) {
-        		return "0";
-        	}else {
         	return multiplyDivide(operand1Array, operand2Array, operator);
-        	}
+        	
         }
     }
         
@@ -91,13 +91,17 @@ public class FracCalc {
     		result[0]=improperFrac1[0]-improperFrac2[0];
     	}
     	result[1]=improperFrac1[1];
-       	return simplifyFrac(result); 	
+    	if(result[0]==0) {
+    		return "0";
+    	}else {
+    		return simplifyFrac(result); 	
+    	}
     }
     
     public static String multiplyDivide(int[] operand1, int[] operand2, String operator) {
     	int [] improperFrac1=improperFrac(operand1);
     	int [] improperFrac2=improperFrac(operand2);
-
+    	
     	int[] result= new int [2];
     	if(operator.equals("/")) {
     		int temp=improperFrac2[0];
@@ -106,8 +110,15 @@ public class FracCalc {
     	}
     	result[0]=improperFrac1[0]*improperFrac2[0];
     	result[1]=improperFrac1[1]*improperFrac2[1];
-    	System.out.println(Arrays.toString(result));
-    	return simplifyFrac(result);
+    	if((result[0]<0&&result[1]>0)||(result[0]>0&&result[1]<0)) {
+    		result[0]=(-1)*absValue(improperFrac1[0]*improperFrac2[0]);
+    		result[1]=absValue(improperFrac1[1]*improperFrac2[1]);
+    	}
+    	if(result[0]==0||result[1]==0) {
+    		return "0";
+    	}else {
+    		return simplifyFrac(result);
+    	}
     }
     
     public static int gcf(int value1, int value2) {
@@ -135,38 +146,38 @@ public class FracCalc {
 			denominator=absValue(denominator);
 		}
 		if(absValue(numerator)%absValue(denominator)==0) {
-			if((numerator<0&&denominator>0)||(numerator>0&&denominator<0)) {
-				return (-1)*absValue(numerator)+"";
-			}else {
-				return numerator+"";
-			}
-			
+			return numerator+"";
 		}else {
-			if(absValue(improperFrac[0])>absValue(improperFrac[1])) {
+			if(absValue(numerator)>absValue(denominator)) {
 				whole=numerator/denominator;
-				if(improperFrac[0]>0) {
-					numerator=numerator-whole*denominator;
-				}else {
-					numerator=absValue(numerator)-absValue(whole*denominator);
-				}
-    			return whole+"_"+numerator+"/"+denominator;
-    		}else {
-    			return numerator+"/"+denominator;
+				numerator=absValue(numerator)-absValue(whole)*absValue(denominator);
+   		
+				return whole+"_"+numerator+"/"+denominator;
+			}else {
+				return numerator+"/"+denominator;
+
     		}
 		}
     }
     public static int[] improperFrac(int[]fraction) {
     	int[]improper=new int[2];
+    	improper[1]=absValue(fraction[2]);
     	if(fraction[0]!=0) {
-    		improper[1]=fraction[2];
-    		if((fraction[0]<0&&fraction[1]>0)||(fraction[0]>0&&fraction[1]<0) {
-    			improper[0]=(((-1)*fraction[0]*fraction[2])+fraction[1])*(-1);
+    		if((fraction[0]<0&&fraction[1]>0)||(fraction[0]>0&&fraction[1]<0)) {
+    			improper[0]=(-1)*(absValue(fraction[0])*absValue(fraction[2])+absValue(fraction[1]));
+    		}else if(fraction[0]<0&&fraction[1]<0){
+    			improper[0]=absValue(fraction[0])*absValue(fraction[2])+absValue(fraction[1]);
     		}else {
     			improper[0]=fraction[0]*fraction[2]+fraction[1];
     		}
     	}else if(fraction[0]==0&&fraction[1]!=0) {
-    		improper[0]=fraction[1];
-    		improper[1]=fraction[2];
+    		if((fraction[1]<0&&fraction[2]>0)||(fraction[1]>0&&fraction[2]<0)){
+    			improper[0]=(-1)*absValue(fraction[1]);
+    		}else if(fraction[1]<0&&fraction[2]<0) {
+    			improper[0]=absValue(fraction[1]);
+    		}else {
+    			improper[0]=fraction[1];	
+    		}    		
     	}else {
     		improper[0]=0;
     		improper[1]=1;
