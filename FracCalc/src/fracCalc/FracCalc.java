@@ -4,6 +4,7 @@
 //frac calc, parsing fractions
 
 package fracCalc;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Arrays;
 
@@ -27,29 +28,41 @@ public class FracCalc {
     public static String produceAnswer(String input){
     	
     	String [] inputArray=input.split(" ");
-    	String firstOperand=inputArray[0];
-    	String operator=inputArray[1];
-    	String secondOperand=inputArray[2];
-    	int[] operand1Array=parseValues(firstOperand);
-        int[] operand2Array=parseValues(secondOperand);
-        if(operator.equals("+")||operator.equals("-")) {
-        	if(firstOperand.equals("0")) {
-        		if(operator.equals("+")) {
-        			return simplifyFrac(improperFrac(operand2Array));
-        		}else {
-        			return "-"+simplifyFrac(improperFrac(operand2Array));
-        		}
-        	}else if(secondOperand.equals("0")) {
-        		return simplifyFrac(improperFrac(operand1Array));
-        	}else {
-        		return addSubtract(operand1Array, operand2Array, operator);
-        	}
+    	String result="";
+    	
+    	for (int i=2; i<inputArray.length;i+=2) {
+    		
+    		String firstOperand=inputArray[0];
+        	String operator=inputArray[i-1];
+        	String secondOperand=inputArray[i];
         	
-        }else {
-        	return multiplyDivide(operand1Array, operand2Array, operator);
-        	
-        }
-    }
+        	int[] operand1Array=parseValues(firstOperand);
+            int[] operand2Array=parseValues(secondOperand);
+            if(operator.equals("+")||operator.equals("-")) {
+            	if(firstOperand.equals("0")) {
+            		if(operator.equals("+")) {
+            			result=simplifyFrac(improperFrac(operand2Array));
+            		}else {
+            			result="-"+simplifyFrac(improperFrac(operand2Array));
+            		}
+            	}else if(secondOperand.equals("0")) {
+            		result=simplifyFrac(improperFrac(operand1Array));
+            	}else {
+            		result=addSubtract(operand1Array, operand2Array, operator);
+            	}
+            	
+            }else {
+            	result=multiplyDivide(operand1Array, operand2Array, operator);
+            }
+            inputArray[0]=result;
+            
+    	}
+    	return result;
+    	
+	}
+	
+    		
+    
         
     	
     
