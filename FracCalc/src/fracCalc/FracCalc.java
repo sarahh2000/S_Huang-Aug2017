@@ -41,23 +41,31 @@ public class FracCalc {
         	//turns the operands into arrays, and then perform math functions
         	int[] operand1Array=parseValues(firstOperand);
             int[] operand2Array=parseValues(secondOperand);
-            if(operator.equals("+")||operator.equals("-")) {
-            	if(firstOperand.equals("0")) {
-            		if(operator.equals("+")) {
-            			result=simplifyFrac(improperFrac(operand2Array));
-            		}else {
-            			result="-"+simplifyFrac(improperFrac(operand2Array));
-            		}
-            	}else if(secondOperand.equals("0")) {
-            		result=simplifyFrac(improperFrac(operand1Array));
-            	}else {
-            		result=addSubtract(operand1Array, operand2Array, operator);
-            	}
-            	
+            if(operand1Array[2]==0||operand2Array[2]==0) {
+            	result="ERROR: cannot divide by 0";
+            	i=inputArray.length;
+            }else if(!(operator.equals("+"))||!(operator.equals("-"))||!(operator.equals("*"))||!(operator.equals("/"))){
+            	result="ERROR: Input is in an invalid format";
+            	i=inputArray.length;
             }else {
-            	result=multiplyDivide(operand1Array, operand2Array, operator);
+            	if(operator.equals("+")||operator.equals("-")) {
+                	if(firstOperand.equals("0")) {
+                		if(operator.equals("+")) {
+                			result=simplifyFrac(improperFrac(operand2Array));
+                		}else {
+                			result="-"+simplifyFrac(improperFrac(operand2Array));
+                		}
+                	}else if(secondOperand.equals("0")) {
+                		result=simplifyFrac(improperFrac(operand1Array));
+                	}else {
+                		result=addSubtract(operand1Array, operand2Array, operator);
+                	}
+                	
+                }else {
+                	result=multiplyDivide(operand1Array, operand2Array, operator);
+                }
+                inputArray[0]=result;
             }
-            inputArray[0]=result;
             
     	}
     	return result;
@@ -130,8 +138,10 @@ public class FracCalc {
     		improperFrac2[0]=improperFrac2[1];
     		improperFrac2[1]=temp;
     	}
+    	//do the math
     	result[0]=improperFrac1[0]*improperFrac2[0];
     	result[1]=improperFrac1[1]*improperFrac2[1];
+    	//to eliminate error, if there's a negative sign, put it on the top
     	if((result[0]<0&&result[1]>0)||(result[0]>0&&result[1]<0)) {
     		result[0]=(-1)*absValue(improperFrac1[0]*improperFrac2[0]);
     		result[1]=absValue(improperFrac1[1]*improperFrac2[1]);
@@ -142,7 +152,7 @@ public class FracCalc {
     		return simplifyFrac(result);
     	}
     }
-    
+    //finds the greatest common factor
     public static int gcf(int value1, int value2) {
 		if(value1==0||value2==0) {
 			return 0;}
@@ -155,20 +165,24 @@ public class FracCalc {
 		}
 		return value1;
 	}
-   
+   //simplifies the fraction and converts to a mixed number when necessary
     public static String simplifyFrac(int[]improperFrac) {
     	int whole=0;
     	int numerator=improperFrac[0];
     	int denominator=improperFrac[1];
+    	//find the gcf, and divide the numerator and the denominator by the gcf
     	int greatestFactor=gcf(absValue(numerator), absValue(denominator));
 		numerator/=greatestFactor;
 		denominator/=greatestFactor;
+		//if the numerator and the denominator are both negative, convert to positive
 		if(numerator<0&&denominator<0) {
 			numerator=absValue(numerator);
 			denominator=absValue(denominator);
 		}
+		//if the numerator is divisible by the denominator, it is a whole number
 		if(absValue(numerator)%absValue(denominator)==0) {
 			return numerator+"";
+		//if not, find the mixed number
 		}else {
 			if(absValue(numerator)>absValue(denominator)) {
 				whole=numerator/denominator;
@@ -181,32 +195,42 @@ public class FracCalc {
     		}
 		}
     }
+    //converts to improper fraction
     public static int[] improperFrac(int[]fraction) {
     	int[]improper=new int[2];
     	improper[1]=absValue(fraction[2]);
+    	//if the whole number is not 0
     	if(fraction[0]!=0) {
+    		//if one of them is negative
     		if((fraction[0]<0&&fraction[1]>0)||(fraction[0]>0&&fraction[1]<0)) {
     			improper[0]=(-1)*(absValue(fraction[0])*absValue(fraction[2])+absValue(fraction[1]));
+    		//if both are negative
     		}else if(fraction[0]<0&&fraction[1]<0){
     			improper[0]=absValue(fraction[0])*absValue(fraction[2])+absValue(fraction[1]);
+    		//if both are positive
     		}else {
     			improper[0]=fraction[0]*fraction[2]+fraction[1];
     		}
+    	//if the whole number is 0 and the numerator is not 0
     	}else if(fraction[0]==0&&fraction[1]!=0) {
+    		//if one is negative
     		if((fraction[1]<0&&fraction[2]>0)||(fraction[1]>0&&fraction[2]<0)){
     			improper[0]=(-1)*absValue(fraction[1]);
+    		//if both are negative
     		}else if(fraction[1]<0&&fraction[2]<0) {
     			improper[0]=absValue(fraction[1]);
+    		//if both are positive
     		}else {
     			improper[0]=fraction[1];	
     		}    		
+    	//if the whole number and numerator are 0
     	}else {
     		improper[0]=0;
     		improper[1]=1;
     	}
     	return improper;
     }
-    
+    //finds the absolute value 
     public static int absValue(int operand) {
 		if(operand>=0) {
 			return operand;
