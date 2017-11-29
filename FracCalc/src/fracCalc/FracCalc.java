@@ -10,7 +10,8 @@ import java.util.Arrays;
 
 public class FracCalc {
 
-    public static void main(String[] args) {
+    //gets data from the user and prints out the answer using a call to produceAnswer
+	public static void main(String[] args) {
     	Scanner userInput= new Scanner(System.in);
     	boolean done=true;
     	while(done) {
@@ -25,17 +26,19 @@ public class FracCalc {
         	
     	}
     }
-    public static String produceAnswer(String input){
+   //parse the string and call a method to do math
+	public static String produceAnswer(String input){
     	
-    	String [] inputArray=input.split(" ");
+    	//split the string by space to make an array of the operands and operators
+		String [] inputArray=input.split(" ");
     	String result="";
-    	
+    	//for loop that does math for the first three spaces, and then sets the result equal to the first space, then adds/subtracts/multiplies/divides the result to the next number
     	for (int i=2; i<inputArray.length;i+=2) {
     		
     		String firstOperand=inputArray[0];
         	String operator=inputArray[i-1];
         	String secondOperand=inputArray[i];
-        	
+        	//turns the operands into arrays, and then perform math functions
         	int[] operand1Array=parseValues(firstOperand);
             int[] operand2Array=parseValues(secondOperand);
             if(operator.equals("+")||operator.equals("-")) {
@@ -59,38 +62,41 @@ public class FracCalc {
     	}
     	return result;
     	
-	}
-	
-    		
-    
-        
+	}      
     	
-    
+   //parse the operands into arrays 
     public static int[] parseValues(String input) {
     	String [] underscoreSplit=input.split("_");
     	String [] slashSplit=input.split("/");
     	String whole="0";
     	String numerator="0";
     	String denominator="1";
+    	//case 1: mixed number
     	if(input.contains("_")==true&&input.contains("/")==true){
     		whole=underscoreSplit[0];
     		numerator=underscoreSplit[1].split("/")[0];
     		denominator=slashSplit[1];
+    	//case 2: normal fraction 
     	}else if(input.contains("_")==false&&input.contains("/")==true) {
     		numerator=slashSplit[0];
     		denominator=slashSplit[1];
+    	//case 3: only whole number
     	}else{
     		whole=input;
     	}
     	int[]parsedInputArray=new int[3];
+    	//turn Strings into ints
     	parsedInputArray[0]=Integer.parseInt(whole);
     	parsedInputArray[1]=Integer.parseInt(numerator);
     	parsedInputArray[2]=Integer.parseInt(denominator);
     	return parsedInputArray;
     }
+    //performs add/subtract
     public static String addSubtract(int[] operand1, int[] operand2, String operator) {
+    	//turn into improper fraction
     	int [] improperFrac1=improperFrac(operand1);
     	int [] improperFrac2=improperFrac(operand2);
+    	//find a common denominator by multiplying by the other denominator
     	int denominator1=improperFrac1[1];
     	int denominator2=improperFrac2[1];
     	improperFrac1[0]*=denominator2;
@@ -98,6 +104,7 @@ public class FracCalc {
     	improperFrac2[0]*=denominator1;
     	improperFrac2[1]*=denominator1;
     	int[] result= new int [2];
+    	//do the math
     	if(operator.equals("+")) {
     		result[0]=improperFrac1[0]+improperFrac2[0];
     	}else {
@@ -110,12 +117,14 @@ public class FracCalc {
     		return simplifyFrac(result); 	
     	}
     }
-    
+    //does multiply/divide
     public static String multiplyDivide(int[] operand1, int[] operand2, String operator) {
+    	//turn into improper fraction
     	int [] improperFrac1=improperFrac(operand1);
     	int [] improperFrac2=improperFrac(operand2);
     	
     	int[] result= new int [2];
+    	//if it's divide, find the reciprocal of the second operand
     	if(operator.equals("/")) {
     		int temp=improperFrac2[0];
     		improperFrac2[0]=improperFrac2[1];
