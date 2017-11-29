@@ -44,9 +44,6 @@ public class FracCalc {
             if(operand1Array[2]==0||operand2Array[2]==0) {
             	result="ERROR: cannot divide by 0";
             	i=inputArray.length;
-            }else if(!(operator.equals("+"))||!(operator.equals("-"))||!(operator.equals("*"))||!(operator.equals("/"))){
-            	result="ERROR: Input is in an invalid format";
-            	i=inputArray.length;
             }else {
             	if(operator.equals("+")||operator.equals("-")) {
                 	if(firstOperand.equals("0")) {
