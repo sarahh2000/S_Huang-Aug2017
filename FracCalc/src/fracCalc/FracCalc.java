@@ -25,9 +25,16 @@ public class FracCalc {
     	String [] inputArray=input.split(" ");
         Fraction fraction1= new Fraction(inputArray[0]);
         Fraction fraction2= new Fraction (inputArray[2]);
+        String operator=inputArray[1];
+        String result="";
+        if(operator.equals("+")||operator.equals("-")) {	
+        	result=fraction1.addSubtract(fraction2, operator);
+        	
+        }else {
+        	result=fraction1.multiplyDivide(fraction2, operator);
+        }
         
-        
-        return fraction2.toString();
+        return result;
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
