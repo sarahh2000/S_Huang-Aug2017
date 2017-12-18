@@ -75,7 +75,7 @@ public class Fraction {
 	}
 
 	public void improperFrac() {
-		numerator=whole*denominator+numerator*sign;
+		numerator=absValue(whole*denominator+numerator)*sign;
 		whole=0;
 	}
 	public String addSubtract(Fraction fraction2, String operator) {
@@ -130,24 +130,27 @@ public class Fraction {
 	}
 	public String simplifyFrac(Fraction result) {
 		//find the gcf, and divide the numerator and the denominator by the gcf
-		int greatestFactor=gcf(absValue(result.numerator), absValue(result.denominator));
-		result.numerator/=greatestFactor;
-		result.denominator/=greatestFactor;
-		//if the numerator and the denominator are both negative, convert to positive
-		if(result.numerator<0&&result.denominator<0) {
-			result.numerator=absValue(result.numerator);
-			result.denominator=absValue(result.denominator);
-		}
-		//if the numerator is divisible by the denominator, it is a whole number
-		if(absValue(result.numerator)%absValue(result.denominator)==0) {
-			result.whole=result.numerator/result.denominator;
-			result.numerator=0;
-			//if not, find the mixed number
+		if (result.numerator==0) {
+			return "0";
 		}else {
-			if(absValue(result.numerator)>absValue(result.denominator)) {
+			int greatestFactor=gcf(absValue(result.numerator), absValue(result.denominator));
+			result.numerator/=greatestFactor;
+			result.denominator/=greatestFactor;
+			//if the numerator and the denominator are both negative, convert to positive
+			if(result.numerator<0&&result.denominator<0) {
+				result.numerator=absValue(result.numerator);
+				result.denominator=absValue(result.denominator);
+			}
+			//if the numerator is divisible by the denominator, it is a whole number
+			if(absValue(result.numerator)%absValue(result.denominator)==0) {
 				result.whole=result.numerator/result.denominator;
-				result.numerator=absValue(result.numerator)-absValue(result.whole)*absValue(result.denominator);
-
+				result.numerator=0;
+				//if not, find the mixed number
+			}else {
+				if(absValue(result.numerator)>absValue(result.denominator)) {
+					result.whole=result.numerator/result.denominator;
+					result.numerator=absValue(result.numerator)-absValue(result.whole)*absValue(result.denominator);
+				}
 			}
 		}
 		return result.toString();
