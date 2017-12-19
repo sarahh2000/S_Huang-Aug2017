@@ -1,18 +1,22 @@
 package fracCalc;
 
 public class Fraction {
+	//fields
 	private int numerator;
 	private int denominator;
 	private int whole;
 	private int sign;
 
-
+	//constructor
 	public Fraction(String input) {
+		//split by slash and underscore
 		String [] underscoreSplit=input.split("_");
 		String [] slashSplit=input.split("/");
+		//initialize fields
 		whole=0;
 		numerator=0;
 		denominator=1;
+		//does the sign
 		if(input.contains("-")) {
 			sign=-1;
 		}else {
@@ -23,11 +27,11 @@ public class Fraction {
 			whole=absValue(Integer.parseInt(underscoreSplit[0]));
 			numerator=Integer.parseInt(underscoreSplit[1].split("/")[0]);
 			denominator=Integer.parseInt(slashSplit[1]);
-			//case 2: normal fraction 
+		//case 2: normal fraction 
 		}else if(input.contains("_")==false&&input.contains("/")==true) {
 			numerator=Integer.parseInt(slashSplit[0]);
 			denominator=Integer.parseInt(slashSplit[1]);
-			//case 3: only whole number
+		//case 3: only whole number
 		}else{
 			whole=absValue(Integer.parseInt(input));
 		}
@@ -73,18 +77,23 @@ public class Fraction {
 		}
 
 	}
-
+	
+	//converts to improper fraction
 	public void improperFrac() {
 		numerator=absValue(whole*denominator+numerator)*sign;
 		whole=0;
+		denominator=absValue(denominator);
 	}
+	
+	//adds or subtracts
 	public String addSubtract(Fraction fraction2, String operator) {
 		improperFrac();
 		fraction2.improperFrac();
 		Fraction result=new Fraction("0_0/1");
-		//find a common denominator by multiplying by the other denominator
+		//saves the denominator as a variable
 		int denominator1=this.denominator;
 		int denominator2=fraction2.denominator;
+		//finds common denominator by multiplying by the other denominator
 		this.numerator*=denominator2;
 		this.denominator*=denominator2;
 		fraction2.numerator*=denominator1;
@@ -96,6 +105,7 @@ public class Fraction {
 			result.numerator=this.numerator-fraction2.numerator;
 		}
 		result.denominator=this.denominator;
+		//if the result is 0, convert to fraction form
 		if(result.numerator==0) {
 			result.whole=0;
 			result.numerator=0;
@@ -103,10 +113,13 @@ public class Fraction {
 		}
 		return simplifyFrac(result);
 	}
+	
+	//multiplies or divides
 	public String multiplyDivide(Fraction fraction2, String operator) {
 		//turn into improper fraction
 		improperFrac();
 		fraction2.improperFrac();
+		//initialize result
 		Fraction result=new Fraction("0_0/1");
 		//if it's divide, find the reciprocal of the second operand
 		if(operator.equals("/")) {
@@ -128,8 +141,11 @@ public class Fraction {
 			return simplifyFrac(result);
 		}
 	}
+	
+	//simplifies the fraction
 	public String simplifyFrac(Fraction result) {
 		//find the gcf, and divide the numerator and the denominator by the gcf
+		//if the numerator is 0, return 0 because whole is still 0 at this point
 		if (result.numerator==0) {
 			return "0";
 		}else {
