@@ -1,5 +1,5 @@
 package fracCalc;
-//test
+//test1
 public class Fraction {
 	//fields
 	private int numerator;
