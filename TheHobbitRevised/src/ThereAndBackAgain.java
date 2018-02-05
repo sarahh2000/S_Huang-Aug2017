@@ -1,10 +1,8 @@
 import java.util.ArrayList;
 
-public class ThereAndBackAgain 
-{
+public class ThereAndBackAgain {
 
-	public static void main(String[] args) 
-	{
+	public static void main(String[] args) {
 		
 		Hobbit frodo = new Hobbit("Frodo");
 		Hobbit sam = new Hobbit("Sam");
@@ -29,10 +27,6 @@ public class ThereAndBackAgain
 		}
 		
 		
-		
-		
-		
-		
 		System.out.println();
 		System.out.println("\n\n\nPART 2:  \n");
 
@@ -48,11 +42,11 @@ public class ThereAndBackAgain
 		// Finally, call the allTravel method passing it party2 and 100 (representing
 		// the 100 miles that party2 has traveled together.  
 		
+		ArrayList<Traveler> party2=new ArrayList<Traveler>();
+		createParty(party2, dwarfNames);
+		allTravel(party2, 100);
+		
 
-
-		
-		
-		
 		
 		
 	}
@@ -62,9 +56,15 @@ public class ThereAndBackAgain
 	// dwarf names. This method will always add a new Hobbit named "Bilbo" and a      
 	// new Wizard named "Gandalf" whose color is "Grey" to the ArrayList.
 	// Then it uses a loop to add all the dwarves from the String array to the party.
-	public static void createParty(ArrayList<Traveler> party, String[] dwarfNames)
-	{	
-	
+	public static void createParty(ArrayList<Traveler> party, String[] dwarfNames){	
+		Traveler bilbo=new Hobbit("Bilbo");
+		Traveler gandalf=new Wizard("Gandalf","Grey");
+		party.add(bilbo);
+		party.add(gandalf);
+		for(String dwarf:dwarfNames) {
+			Traveler x=new Dwarf(dwarf);
+			party.add(x);
+		}
 	}
 	
 	// The allTravel method accepts an ArrayList of Travelers and an integer number 
@@ -75,8 +75,11 @@ public class ThereAndBackAgain
 	//     Gandalf the grey has traveled 300 miles
 	//     fili has traveled 100 miles
 	//     kili has traveled 100 miles
-	public static String allTravel(ArrayList<Traveler> party, int miles)
-	{
-		return "";
+	public static String allTravel(ArrayList<Traveler> party, int miles){
+		String result="";
+		for(Traveler trav:party) {
+			result+=trav.getName()+" has traveled "+trav.getDistanceTraveled()+"miles\n";
+		}
+		return result;
 	}
 }
