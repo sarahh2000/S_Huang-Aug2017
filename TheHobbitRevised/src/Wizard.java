@@ -14,7 +14,8 @@ public class Wizard extends Traveler
 	
 	public Wizard(String name, String color)
 	{
-	
+		super(name);
+		this.color=color;
 	}
 	
 	public void travel(int miles)
