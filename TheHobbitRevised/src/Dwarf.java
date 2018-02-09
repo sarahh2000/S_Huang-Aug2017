@@ -1,3 +1,7 @@
+//Sarah Huang
+//APCS2
+//February 9
+//Dwarf class
 public class Dwarf extends Traveler
 {
 	//Dwarves will need a constructor, but there's nothing new for them beyond

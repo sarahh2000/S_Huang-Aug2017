@@ -1,4 +1,7 @@
-
+//Sarah Huang
+//APCS2
+//February 9
+//Hobbit class
 public class Hobbit extends Traveler
 {
 	//Call Traveler's constructor (look it up p587) to set the name field and then 

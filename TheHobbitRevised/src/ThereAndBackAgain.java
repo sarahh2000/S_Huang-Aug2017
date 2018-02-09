@@ -1,3 +1,7 @@
+//Sarah Huang
+//APCS2
+//February 9
+//hobbit client code
 import java.util.ArrayList;
 
 public class ThereAndBackAgain {
@@ -40,9 +44,9 @@ public class ThereAndBackAgain {
 		
 		ArrayList<Traveler> party2=new ArrayList<Traveler>();
 		createParty(party2, dwarfNames);
-		allTravel(party2, 100);
+		System.out.println(allTravel(party2, 100));
 		
-
+		
 		
 		
 	}
@@ -72,7 +76,7 @@ public class ThereAndBackAgain {
 		String result="";
 		for(Traveler trav:party) {
 			trav.travel(miles);
-			result+=trav.getName()+" has traveled "+trav.getDistanceTraveled()+"miles\n";
+			result+=trav.getName()+" has traveled "+trav.getDistanceTraveled()+" miles\n";
 		}
 		return result;
 	}
