@@ -15,17 +15,13 @@
  */
 
 
-public class Prism  {
+public abstract class Prism  {
 	private double height;
 	public Prism(double height) {
 		this.height=height;
 	}
-	public double calcAreaOfBase() {
-		return 0;
-	}
-	public double calcPerimeter() {
-		return 0;
-	}
+	public abstract double calcAreaOfBase();
+	public abstract double calcPerimeter();
 	public double calcVolume() {
 		return this.calcAreaOfBase()*height;
 	}

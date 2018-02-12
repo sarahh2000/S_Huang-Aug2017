@@ -1,3 +1,7 @@
+//Sarah Huang
+//APCS2
+//February 9
+//Traveler class (super)
 
 public class Traveler 
 {
