@@ -15,10 +15,44 @@
  */
 
 
-public class TriangularPrism 
-{
+public class TriangularPrism extends Prism{
+	private double sideA;
+	private double sideB;
+	private double sideC;
 	
+	public TriangularPrism(double sideA, double sideB, double sideC, double height) {
+		super(height);
+		this.sideA=sideA;
+		this.sideB=sideB;
+		this.sideC=sideC;
+	}
+	public static double round2(double value) {
+		int tempInt = (int) (value*1000);
+		int roundNum = tempInt % 10;
+		tempInt = tempInt/10;
+		if(roundNum>=5) {
+			tempInt++;
+		}else if(roundNum<= -5){
+			tempInt--;
+		}
+		return tempInt/100.0;
+	}
+	public static double sqrt(double value) {
+		if(value<0)throw new IllegalArgumentException ("cannot take a negative root");
+		double var1=value;
+		double squareroot=value/2.0;
+			while((var1-squareroot)!=0) {
+				var1=squareroot;
+				squareroot=(var1+(value/var1))/2;
+			}
+			return round2(squareroot);
+	}
 	
-	
-	
+	public double calcPerimeter() {
+		return sideA+sideB+sideC;
+	}
+	public double calcAreaOfBase() {
+		double s=0.5*calcPerimeter();
+		return sqrt(s*(s-sideA)*(s-sideB)*(s-sideC));
+	}
 }
