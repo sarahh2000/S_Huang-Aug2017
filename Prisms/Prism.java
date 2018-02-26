@@ -15,24 +15,14 @@
  */
 
 
-public abstract class Prism  {
+public abstract class Prism extends ThreeDShape {
 	private double height;
 	public Prism(double height) {
+		super();
 		this.height=height;
 	}
 	public abstract double calcAreaOfBase();
 	public abstract double calcPerimeter();
-	public static double round2(double value) {
-		int tempInt = (int) (value*1000);
-		int roundNum = tempInt % 10;
-		tempInt = tempInt/10;
-		if(roundNum>=5) {
-			tempInt++;
-		}else if(roundNum<= -5){
-			tempInt--;
-		}
-		return tempInt/100.0;
-	}
 	public double calcVolume() {
 		return round2(this.calcAreaOfBase()*height);
 	}
