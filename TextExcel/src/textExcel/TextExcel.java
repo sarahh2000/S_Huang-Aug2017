@@ -7,13 +7,18 @@ package textExcel;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-// Update this file with your own code.
 
 public class TextExcel
 {
 
 	public static void main(String[] args)
 	{
-	    // Add your command loop here
+	    Scanner userInput=new Scanner(System.in);
+	    Spreadsheet grid=new Spreadsheet();
+	    while (!(userInput.nextLine().toLowerCase().equals("quit"))){
+	    	String command=userInput.nextLine();
+	    	System.out.println(grid.processCommand(command));
+	    	
+	    }
 	}
 }
