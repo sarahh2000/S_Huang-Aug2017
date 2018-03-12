@@ -9,16 +9,17 @@ public class SpreadsheetLocation implements Location
     
     public int getRow()
     {
-        return character-65;
+        return num-1;
     }
 
     public int getCol()
     {
-       return num-1;
+       return character-65;
     }
     
     public SpreadsheetLocation(String place) {
-    	character=place.charAt(0);
+    	String letter=place.substring(0,1).toUpperCase();
+    	character=letter.charAt(0);
     	num=Integer.parseInt(place.substring(1));
     }
 
