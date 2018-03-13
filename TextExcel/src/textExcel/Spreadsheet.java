@@ -8,14 +8,43 @@ package textExcel;
 
 public class Spreadsheet implements Grid
 {
-	private EmptyCell[][] cellArray;
+	private Cell[][] cellArray;
 	public Spreadsheet() {
 		cellArray=new EmptyCell[20][12];
 	}
 
 	public String processCommand(String command)
 	{
-		return "";
+		if(command.length()==2||command.length()==3) {
+			Location position=new SpreadsheetLocation(command);
+			return inspectCell(position);
+		}else if(command.contains("=")) {
+			assignCell(command);
+		}else if(command.contains("clear")) {
+			
+		}
+	}
+	public String inspectCell(Location loc) {
+		return getCell(loc).fullCellText();
+	}
+	public String assignCell(String input) {
+		String[] assignment=input.split(" ");
+		Location loc=new SpreadsheetLocation(assignment[0]);
+		cellArray[loc.getRow()][loc.getCol()]=new TextCell(input);
+		return getGridText();
+		
+	}
+	public String clear() {
+		for (int i=0;i<cellArray.length;i++) {
+			for (int j=0; j<cellArray[i].length;j++) {
+				cellArray[i][j]=new EmptyCell();
+			}
+		}
+		return getGridText();
+	}
+	public String clearCell(Location loc) {
+		cellArray[loc.getRow()][loc.getCol()]=new EmptyCell();
+		return getGridText();
 	}
 
 	public int getRows()
@@ -28,18 +57,38 @@ public class Spreadsheet implements Grid
 		return 12;
 	}
 
-	@Override
 	public Cell getCell(Location loc)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return cellArray[loc.getRow()][loc.getCol()];
 	}
 
-	@Override
 	public String getGridText()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		String result="";
+		//top row header
+		result+="  |";
+		for (int i=65; i<=76;i++) {
+			result+=(char)i;
+			for(int j=0; j<9; j++) {
+				result+=" ";
+			}
+			result+="|";
+		}
+		result+="\n";
+		for(int k=1;k<=20;k++) {
+			if(k<10) {
+				result+=k+" ";
+			}else {
+				result+=k;
+			}
+			result+="|";
+			for(int l=0;l<12;l++) {
+				result+=cellArray[k-1][l].abbreviatedCellText();
+				result+="|";
+			}
+			result+="/n";
+		}
+		return result;
 	}
 
 }
