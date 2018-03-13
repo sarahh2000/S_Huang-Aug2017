@@ -18,7 +18,7 @@ public class TextExcel
 	    while (!(userInput.nextLine().toLowerCase().equals("quit"))){
 	    	String command=userInput.nextLine();
 	    	System.out.println(grid.processCommand(command));
-	    	
 	    }
+	    
 	}
 }

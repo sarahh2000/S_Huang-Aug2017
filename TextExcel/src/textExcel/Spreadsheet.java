@@ -15,13 +15,26 @@ public class Spreadsheet implements Grid
 
 	public String processCommand(String command)
 	{
-		if(command.length()==2||command.length()==3) {
+		if(command.equals("clear")) {
+			clear();
+			return getGridText();
+
+		/*if(command.length()==2||command.length()==3) {
 			Location position=new SpreadsheetLocation(command);
 			return inspectCell(position);
 		}else if(command.contains("=")) {
 			assignCell(command);
-		}else if(command.contains("clear")) {
-			
+			return getGridText();
+		}else if(command.equals("clear")) {
+			clear();
+			return getGridText();
+		//clear cell
+		}else if (command.contains("clear")&& command.length()>5){
+			Location position=new SpreadsheetLocation(command.substring(6));
+			clearCell(position);
+			return getGridText();*/
+		}else {
+			return "";
 		}
 	}
 	public String inspectCell(Location loc) {
