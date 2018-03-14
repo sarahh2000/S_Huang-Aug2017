@@ -15,9 +15,14 @@ public class TextExcel
 	{
 	    Scanner userInput=new Scanner(System.in);
 	    Spreadsheet grid=new Spreadsheet();
-	    while (!(userInput.nextLine().toLowerCase().equals("quit"))){
-	    	String command=userInput.nextLine();
-	    	System.out.println(grid.processCommand(command));
+	    boolean done=true;
+	    while(done) {
+        	String input=userInput.nextLine();
+        	if(input.equals("quit")){
+        		done=false;
+        	}else{
+        		System.out.println(grid.processCommand(input));
+        	}
 	    }
 	    
 	}

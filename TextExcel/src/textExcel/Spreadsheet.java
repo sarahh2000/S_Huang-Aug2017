@@ -4,13 +4,20 @@
 
 package textExcel;
 
+import java.util.Arrays;
+
 // Update this file with your own code.
 
 public class Spreadsheet implements Grid
 {
 	private Cell[][] cellArray;
 	public Spreadsheet() {
-		cellArray=new EmptyCell[20][12];
+		cellArray=new Cell[20][12];
+		for(int i=0;i<cellArray.length;i++) {
+			for (int j=0;j<cellArray[i].length;j++) {
+				cellArray[i][j]=new EmptyCell();
+			}
+		}
 	}
 
 	public String processCommand(String command)
@@ -18,21 +25,18 @@ public class Spreadsheet implements Grid
 		if(command.equals("clear")) {
 			clear();
 			return getGridText();
-
-		/*if(command.length()==2||command.length()==3) {
-			Location position=new SpreadsheetLocation(command);
-			return inspectCell(position);
 		}else if(command.contains("=")) {
 			assignCell(command);
 			return getGridText();
-		}else if(command.equals("clear")) {
-			clear();
-			return getGridText();
+		/*}else if(command.length()==2||command.length()==3) {
+			Location position=new SpreadsheetLocation(command);
+			System.out.println("a");
+			return inspectCell(position);*/
 		//clear cell
 		}else if (command.contains("clear")&& command.length()>5){
 			Location position=new SpreadsheetLocation(command.substring(6));
 			clearCell(position);
-			return getGridText();*/
+			return getGridText();
 		}else {
 			return "";
 		}
@@ -43,7 +47,7 @@ public class Spreadsheet implements Grid
 	public String assignCell(String input) {
 		String[] assignment=input.split(" ");
 		Location loc=new SpreadsheetLocation(assignment[0]);
-		cellArray[loc.getRow()][loc.getCol()]=new TextCell(assignment[2]);
+		cellArray[loc.getRow()][loc.getCol()]=new TextCell(assignment[2].substring(1, assignment[2].length()-1));
 		return getGridText();
 		
 	}
@@ -99,7 +103,7 @@ public class Spreadsheet implements Grid
 				result+=cellArray[k-1][l].abbreviatedCellText();
 				result+="|";
 			}
-			result+="/n";
+			result+="\n";
 		}
 		return result;
 	}
