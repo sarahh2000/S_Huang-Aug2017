@@ -43,7 +43,7 @@ public class Spreadsheet implements Grid
 	public String assignCell(String input) {
 		String[] assignment=input.split(" ");
 		Location loc=new SpreadsheetLocation(assignment[0]);
-		cellArray[loc.getRow()][loc.getCol()]=new TextCell(input);
+		cellArray[loc.getRow()][loc.getCol()]=new TextCell(assignment[2]);
 		return getGridText();
 		
 	}
