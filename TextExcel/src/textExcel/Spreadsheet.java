@@ -22,18 +22,17 @@ public class Spreadsheet implements Grid
 
 	public String processCommand(String command)
 	{
-		if(command.equals("clear")) {
+		if(command.toLowerCase().equals("clear")) {
 			clear();
 			return getGridText();
-		}else if(command.contains("=")) {
+		}else if(command.contains("=")&&command.contains("\"")) {
 			assignCell(command);
 			return getGridText();
-		/*}else if(command.length()==2||command.length()==3) {
+		}else if(command.length()==2||command.length()==3) {
 			Location position=new SpreadsheetLocation(command);
-			System.out.println("a");
-			return inspectCell(position);*/
+			return inspectCell(position);
 		//clear cell
-		}else if (command.contains("clear")&& command.length()>5){
+		}else if (command.toLowerCase().contains("clear")&& command.length()>5){
 			Location position=new SpreadsheetLocation(command.substring(6));
 			clearCell(position);
 			return getGridText();
@@ -47,7 +46,7 @@ public class Spreadsheet implements Grid
 	public String assignCell(String input) {
 		String[] assignment=input.split(" ");
 		Location loc=new SpreadsheetLocation(assignment[0]);
-		cellArray[loc.getRow()][loc.getCol()]=new TextCell(assignment[2].substring(1, assignment[2].length()-1));
+		cellArray[loc.getRow()][loc.getCol()]=new TextCell(assignment[2]);
 		return getGridText();
 		
 	}
@@ -83,7 +82,7 @@ public class Spreadsheet implements Grid
 	{
 		String result="";
 		//top row header
-		result+="  |";
+		result+="   |";
 		for (int i=65; i<=76;i++) {
 			result+=(char)i;
 			for(int j=0; j<9; j++) {
@@ -94,9 +93,9 @@ public class Spreadsheet implements Grid
 		result+="\n";
 		for(int k=1;k<=20;k++) {
 			if(k<10) {
-				result+=k+" ";
+				result+=k+"  ";
 			}else {
-				result+=k;
+				result+=k+" ";
 			}
 			result+="|";
 			for(int l=0;l<12;l++) {
