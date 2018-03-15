@@ -7,15 +7,20 @@ public class TextCell implements Cell {
 	}
 	// text for spreadsheet cell display, must be exactly length 10
 	public String abbreviatedCellText() { 
-		if(cellText.length()<12) {
-			String result=cellText.substring(1,cellText.length()-1);
-			for(int i=0; i<(12-cellText.length());i++) {
-				result+=" ";
+		if(cellText.contains("\"")) {
+			if(cellText.length()<12) {
+				String result=cellText.substring(1,cellText.length()-1);
+				for(int i=0; i<(12-cellText.length());i++) {
+					result+=" ";
+				}
+				return result;
+			}else {
+				return cellText.substring(1,11);
 			}
-			return result;
 		}else {
-			return cellText.substring(1,11);
+			return cellText.substring(0,10);
 		}
+		
 	}
 	// text for individual cell inspection, not truncated or padded
 	public String fullCellText() {

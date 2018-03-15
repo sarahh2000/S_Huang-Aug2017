@@ -25,7 +25,7 @@ public class Spreadsheet implements Grid
 		if(command.toLowerCase().equals("clear")) {
 			clear();
 			return getGridText();
-		}else if(command.contains("=")&&command.contains("\"")) {
+		}else if(command.contains("=")) {
 			assignCell(command);
 			return getGridText();
 		}else if(command.length()==2||command.length()==3) {
@@ -44,9 +44,9 @@ public class Spreadsheet implements Grid
 		return getCell(loc).fullCellText();
 	}
 	public String assignCell(String input) {
-		String[] assignment=input.split(" ");
-		Location loc=new SpreadsheetLocation(assignment[0]);
-		cellArray[loc.getRow()][loc.getCol()]=new TextCell(assignment[2]);
+		String[] assignment=input.split("=", 2);
+		Location loc=new SpreadsheetLocation(assignment[0].substring(0,assignment[0].indexOf(" ")));
+		cellArray[loc.getRow()][loc.getCol()]=new TextCell(assignment[1].substring(1));
 		return getGridText();
 		
 	}
