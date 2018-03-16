@@ -1,3 +1,6 @@
+//Sarah Huang
+//March 16 2018
+//Text cell class
 package textExcel;
 
 public class TextCell implements Cell {
