@@ -46,7 +46,16 @@ public class Spreadsheet implements Grid
 	public String assignCell(String input) {
 		String[] assignment=input.split("=", 2);
 		Location loc=new SpreadsheetLocation(assignment[0].substring(0,assignment[0].indexOf(" ")));
-		cellArray[loc.getRow()][loc.getCol()]=new TextCell(assignment[1].substring(1));
+		if(assignment[1].contains("\"")) {
+			cellArray[loc.getRow()][loc.getCol()]=new TextCell(assignment[1].substring(1));
+		}else if(assignment[1].contains("(")&&assignment[1].contains(")")){
+			cellArray[loc.getRow()][loc.getCol()]=new FormulaCell(assignment[1].substring(1));
+		}else if(assignment[1].contains("%")) {
+			cellArray[loc.getRow()][loc.getCol()]=new PercentCell(assignment[1].substring(1));
+		}else {
+			cellArray[loc.getRow()][loc.getCol()]=new ValueCell(assignment[1].substring(1));
+		}
+		
 		return getGridText();
 		
 	}
