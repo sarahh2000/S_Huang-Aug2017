@@ -13,10 +13,11 @@ public class PercentCell extends ValueCell{
 	}
 	public String abbreviatedCellText() {
 		String realDecimal=decimal+"";
-		String result=realDecimal;
+		String realDecimalPart=realDecimal.substring(0,realDecimal.indexOf("."));
+		String result=realDecimalPart;
 		if(realDecimal.length()<9) {
 			result+="%";
-			for(int i=0; i<9-realDecimal.length();i++) {
+			for(int i=0; i<9-realDecimalPart.length();i++) {
 				result+=" ";
 			}
 			return result;

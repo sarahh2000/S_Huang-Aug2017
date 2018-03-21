@@ -49,7 +49,7 @@ public class Spreadsheet implements Grid
 		if(assignment[1].contains("\"")) {
 			cellArray[loc.getRow()][loc.getCol()]=new TextCell(assignment[1].substring(1));
 		}else if(assignment[1].contains("(")&&assignment[1].contains(")")){
-			cellArray[loc.getRow()][loc.getCol()]=new FormulaCell(assignment[1].substring(1));
+			cellArray[loc.getRow()][loc.getCol()]=new FormulaCell(assignment[1].substring(1).toLowerCase());
 		}else if(assignment[1].contains("%")) {
 			cellArray[loc.getRow()][loc.getCol()]=new PercentCell(assignment[1].substring(1));
 		}else {

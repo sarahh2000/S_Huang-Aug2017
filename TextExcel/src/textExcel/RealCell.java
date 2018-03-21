@@ -10,18 +10,19 @@ public class RealCell implements Cell{
 	}
 	// text for spreadsheet cell display, must be exactly length 10
 	public String abbreviatedCellText() {
-		String result=cellText;
+		String doubleValue=this.getDoubleValue()+"";
+		String result=doubleValue;
 		if(cellText.length()<10) {
-			for(int i=0; i<10-cellText.length();i++) {
+			for(int i=0; i<10-doubleValue.length();i++) {
 				result+=" ";
 			}
 			return result;
 		}else {
-			return cellText.substring(0, 10);
+			return doubleValue.substring(0, 10);
 		}
 	} 
 	public String getCellText() {
-		return cellText;
+		return this.getDoubleValue()+"";
 	}
 	public void setCellText(String cellText) {
 		this.cellText = cellText;
