@@ -2,6 +2,7 @@
 //March 19
 //formula cell class
 package textExcel;
+import java.util.Arrays;
 
 public class FormulaCell extends RealCell{
 	public FormulaCell(String cellText) {
@@ -10,7 +11,8 @@ public class FormulaCell extends RealCell{
 
 	public double getDoubleValue() {
 		//split the string by space to make an array of the operands and operators
-		String [] inputArray=getCellText().split(" ");
+		String text=fullCellText();
+		String [] inputArray=text.split(" ");
 		String result="";
 		//for loop that does math for the first three spaces, and then sets the result equal to the first space, then adds/subtracts/multiplies/divides the result to the next number
 		for (int i=3; i<inputArray.length-1;i+=2) {
