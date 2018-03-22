@@ -12,7 +12,7 @@ public class RealCell implements Cell{
 	public String abbreviatedCellText() {
 		String doubleValue=this.getDoubleValue()+"";
 		String result=doubleValue;
-		if(cellText.length()<10) {
+		if(doubleValue.length()<10) {
 			for(int i=0; i<10-doubleValue.length();i++) {
 				result+=" ";
 			}
