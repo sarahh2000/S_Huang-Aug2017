@@ -27,14 +27,10 @@ public class FormulaCell extends RealCell{
 					String firstOperand=inputArray[1];
 					String operator=inputArray[i-1];
 					String secondOperand=inputArray[i];
-					
 					String character=inputArray[1].substring(0, 1).toUpperCase();
 					if(character.charAt(0)>=65&&character.charAt(0)<=76) {
 						//get cell
 					}
-					
-					
-
 					if(operator.equals("+")||operator.equals("-")) {
 						if(firstOperand.equals("0")) {
 							if(operator.equals("+")) {
