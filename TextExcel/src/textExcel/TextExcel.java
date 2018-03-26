@@ -10,11 +10,10 @@ import java.util.Scanner;
 
 public class TextExcel
 {
-
+	static Spreadsheet grid=new Spreadsheet();
 	public static void main(String[] args)
 	{
 	    Scanner userInput=new Scanner(System.in);
-	    Spreadsheet grid=new Spreadsheet();
 	    boolean done=true;
 	    while(done) {
         	String input=userInput.nextLine();
