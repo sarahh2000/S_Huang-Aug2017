@@ -5,14 +5,17 @@ package textExcel;
 
 public class FormulaCell extends RealCell{
 	Spreadsheet grid;
+	Cell [][] cellArray;
 	public FormulaCell(String cellText) {
 		super(cellText);
 		this.grid=TextExcel.grid;
+		this.cellArray=grid.getCellArray();
 	}
+	
 
 	public double getDoubleValue() {
 		//split the string by space to make an array of the operands and operators
-		String text=fullCellText();
+		String text=fullCellText().toLowerCase();
 		String [] inputArray=text.split(" ");
 		String result="";
 		//for loop that does math for the first three spaces, and then sets the result equal to the first space, then adds/subtracts/multiplies/divides the result to the next number
@@ -22,11 +25,20 @@ public class FormulaCell extends RealCell{
 			if(inputArray[1].equals("sum")) {
 				return sum(inputArray[2]);
 			}else if(inputArray[1].equals("avg")) {
+				String range1=inputArray[2].substring(0,inputArray[2].indexOf("-"));
+				String range2=inputArray[2].substring(inputArray[2].indexOf("-")+1);
+				Location loc1=new SpreadsheetLocation(range1);
+				Location loc2=new SpreadsheetLocation(range2);
 				String range=inputArray[2];
-				int width=(range.charAt(range.indexOf("-")+1)-range.charAt(0)+1);
-				int height=Integer.parseInt(range.substring(range.indexOf("-"+2)))-Integer.parseInt(range.substring(1, range.indexOf("-")))+1;
+				int width=loc2.getCol()-loc1.getCol()+1;
+				int height=loc2.getRow()-loc1.getRow()+1;
 				int num=width*height;
-				return sum(inputArray[2])/num;
+				if(num==1) {
+					return sum(inputArray[2]);
+				}else {
+					return sum(inputArray[2])/num;
+				}
+				
 			}else {
 				for (int i=3; i<inputArray.length-1;i+=2) {
 					String firstOperand=convertCell(inputArray[1]);
@@ -97,10 +109,8 @@ public class FormulaCell extends RealCell{
 		double sum=0;
 		for(int i=loc1.getRow();i<=loc2.getRow();i++) {
 			for(int j=loc1.getCol();j<=loc2.getCol();j++) {
-				String location=(Character.toString((char)(j+65)))+i;
-				Location finalloc=new SpreadsheetLocation (location);
-				if(!(grid.getCell(finalloc) instanceof EmptyCell)){
-					RealCell real=(RealCell)(grid.getCell(finalloc));
+				if(!(cellArray[i][j] instanceof EmptyCell)){
+					RealCell real=(RealCell)(cellArray[i][j]);
 					sum+=real.getDoubleValue();
 				}else {
 					sum+=0;
@@ -109,4 +119,5 @@ public class FormulaCell extends RealCell{
 		}
 		return sum;
 	}
+	
 }
