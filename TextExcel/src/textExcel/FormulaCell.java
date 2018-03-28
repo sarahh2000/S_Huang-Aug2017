@@ -20,14 +20,19 @@ public class FormulaCell extends RealCell{
 			return Double.parseDouble(inputArray[1]);
 		}else {
 			if(inputArray[1].equals("sum")) {
-				return 0;
+				return sum(inputArray[2]);
 			}else if(inputArray[1].equals("avg")) {
-				return 0;
+				String range=inputArray[2];
+				int width=(range.charAt(range.indexOf("-")+1)-range.charAt(0)+1);
+				int height=Integer.parseInt(range.substring(range.indexOf("-"+2)))-Integer.parseInt(range.substring(1, range.indexOf("-")))+1;
+				int num=width*height;
+				return sum(inputArray[2])/num;
 			}else {
 				for (int i=3; i<inputArray.length-1;i+=2) {
 					String firstOperand=convertCell(inputArray[1]);
 					String operator=inputArray[i-1];
 					String secondOperand=convertCell(inputArray[i]);
+				
 
 					if(operator.equals("+")||operator.equals("-")) {
 						if(firstOperand.equals("0")) {
@@ -83,5 +88,25 @@ public class FormulaCell extends RealCell{
 		}else {
 			return input;
 		}
+	}
+	public double sum(String input) {
+		String range1=input.substring(0,input.indexOf("-"));
+		String range2=input.substring(input.indexOf("-")+1);
+		Location loc1=new SpreadsheetLocation(range1);
+		Location loc2=new SpreadsheetLocation(range2);
+		double sum=0;
+		for(int i=loc1.getRow();i<=loc2.getRow();i++) {
+			for(int j=loc1.getCol();j<=loc2.getCol();j++) {
+				String location=(Character.toString((char)(j+65)))+i;
+				Location finalloc=new SpreadsheetLocation (location);
+				if(!(grid.getCell(finalloc) instanceof EmptyCell)){
+					RealCell real=(RealCell)(grid.getCell(finalloc));
+					sum+=real.getDoubleValue();
+				}else {
+					sum+=0;
+				}
+			}
+		}
+		return sum;
 	}
 }
