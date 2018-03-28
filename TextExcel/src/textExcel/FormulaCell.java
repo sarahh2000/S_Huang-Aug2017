@@ -4,8 +4,10 @@
 package textExcel;
 
 public class FormulaCell extends RealCell{
+	Spreadsheet grid;
 	public FormulaCell(String cellText) {
 		super(cellText);
+		this.grid=TextExcel.grid;
 	}
 
 	public double getDoubleValue() {
@@ -22,22 +24,10 @@ public class FormulaCell extends RealCell{
 			}else if(inputArray[1].equals("avg")) {
 				return 0;
 			}else {
-				for(int k=1;k<inputArray.length;k+=2) {
-					String character=inputArray[k].substring(0, 1).toUpperCase();
-					if(character.charAt(0)>=65&&character.charAt(0)<=76) {
-						//get cell
-					}
-				}
-
 				for (int i=3; i<inputArray.length-1;i+=2) {
-					String firstOperand=inputArray[1];
+					String firstOperand=convertCell(inputArray[1]);
 					String operator=inputArray[i-1];
-					String secondOperand=inputArray[i];
-
-					
-					
-				
-
+					String secondOperand=convertCell(inputArray[i]);
 
 					if(operator.equals("+")||operator.equals("-")) {
 						if(firstOperand.equals("0")) {
@@ -79,5 +69,19 @@ public class FormulaCell extends RealCell{
 			result=Double.parseDouble(firstOperand)/Double.parseDouble(secondOperand);
 		}
 		return result;
+	}
+	public String convertCell(String input) {
+		String character=input.substring(0, 1).toUpperCase();
+		if(character.charAt(0)>=65&&character.charAt(0)<=76) {
+			Location loc=new SpreadsheetLocation(input);
+			if(!(grid.getCell(loc) instanceof EmptyCell)){
+				RealCell real=(RealCell)(grid.getCell(loc));
+				return real.getDoubleValue()+"";
+			}else {
+				return 0+"";
+			}
+		}else {
+			return input;
+		}
 	}
 }
