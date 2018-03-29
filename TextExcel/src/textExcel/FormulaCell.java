@@ -29,7 +29,6 @@ public class FormulaCell extends RealCell{
 				String range2=inputArray[2].substring(inputArray[2].indexOf("-")+1);
 				Location loc1=new SpreadsheetLocation(range1);
 				Location loc2=new SpreadsheetLocation(range2);
-				String range=inputArray[2];
 				int width=loc2.getCol()-loc1.getCol()+1;
 				int height=loc2.getRow()-loc1.getRow()+1;
 				int num=width*height;
