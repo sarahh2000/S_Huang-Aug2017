@@ -6,9 +6,9 @@ package textExcel;
 public class FormulaCell extends RealCell{
 	Spreadsheet grid;
 	Cell [][] cellArray;
-	public FormulaCell(String cellText) {
+	public FormulaCell(String cellText, Spreadsheet grid) {
 		super(cellText);
-		this.grid=TextExcel.grid;
+		this.grid=grid;
 		this.cellArray=grid.getCellArray();
 	}
 	

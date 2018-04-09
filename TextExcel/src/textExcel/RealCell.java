@@ -3,7 +3,7 @@
 //real cell class
 package textExcel;
 
-public class RealCell implements Cell{
+public class RealCell implements Cell, Comparable<RealCell>{
 	private String cellText;
 	public RealCell(String cellText) {
 		this.cellText=cellText;
@@ -34,5 +34,13 @@ public class RealCell implements Cell{
 	public double getDoubleValue() {
 		return Double.parseDouble(cellText);
 	}
-
+	public int compareTo(RealCell cell) {
+		if(this.getDoubleValue()<cell.getDoubleValue()) {
+			return -1;
+		}else if(this.getDoubleValue()>cell.getDoubleValue()) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
 }
