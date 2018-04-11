@@ -5,6 +5,7 @@ package textExcel;
 
 public class EmptyCell implements Cell{
 	private String cellText;
+	//constructor for EmptyCell
 	public EmptyCell() {
 		this.cellText="";
 	}

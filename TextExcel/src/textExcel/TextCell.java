@@ -3,7 +3,7 @@
 //Text cell class
 package textExcel;
 
-public class TextCell implements Cell, Comparable<TextCell> {
+public class TextCell implements Cell {
 	private String cellText;
 	public TextCell(String cellText) {
 		this.cellText=cellText;
@@ -29,7 +29,5 @@ public class TextCell implements Cell, Comparable<TextCell> {
 	public String fullCellText() {
 		return cellText;
 	}
-	public int compareTo(TextCell cell) {
-		return this.fullCellText().compareTo(cell.fullCellText());
-	}
+
 }

@@ -6,6 +6,7 @@ package textExcel;
 public class FormulaCell extends RealCell{
 	Spreadsheet grid;
 	Cell [][] cellArray;
+	//constructor for FormulaCell
 	public FormulaCell(String cellText, Spreadsheet grid) {
 		super(cellText);
 		this.grid=grid;
@@ -23,17 +24,27 @@ public class FormulaCell extends RealCell{
 			return Double.parseDouble(inputArray[1]);
 		}else {
 			if(inputArray[1].equals("sum")) {
+				//uses the sum method described below
 				return sum(inputArray[2]);
 			}else if(inputArray[1].equals("avg")) {
+				//gets the first range
 				String range1=inputArray[2].substring(0,inputArray[2].indexOf("-"));
+				//gets the second range
 				String range2=inputArray[2].substring(inputArray[2].indexOf("-")+1);
+				//makes a new location at the first range
 				Location loc1=new SpreadsheetLocation(range1);
+				//makes a location at the second range
 				Location loc2=new SpreadsheetLocation(range2);
+				//calculate the number of cells across
 				int width=loc2.getCol()-loc1.getCol()+1;
+				//calculate the number of cells down
 				int height=loc2.getRow()-loc1.getRow()+1;
+				//calculates total number of cells in the range
 				int num=width*height;
+				//if the range includes only 1 cell, return the sum only
 				if(num==1) {
 					return sum(inputArray[2]);
+				//if the range is greater than 1 cell, return sum divided by the number of cells
 				}else {
 					return sum(inputArray[2])/num;
 				}
