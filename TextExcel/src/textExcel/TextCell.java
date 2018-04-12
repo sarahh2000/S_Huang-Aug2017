@@ -5,13 +5,16 @@ package textExcel;
 
 public class TextCell implements Cell {
 	private String cellText;
+	//constructor for text cell
 	public TextCell(String cellText) {
 		this.cellText=cellText;
 	}
 	// text for spreadsheet cell display, must be exactly length 10
 	public String abbreviatedCellText() { 
 		if(cellText.contains("\"")) {
+			//to factor in quotes
 			if(cellText.length()<12) {
+				//to take out the quotes
 				String result=cellText.substring(1,cellText.length()-1);
 				for(int i=0; i<(12-cellText.length());i++) {
 					result+=" ";

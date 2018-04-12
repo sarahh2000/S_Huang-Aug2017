@@ -12,12 +12,14 @@ public class TextExcel
 {
 	public static void main(String[] args)
 	{
-	    Scanner userInput=new Scanner(System.in);
+	    //to gather data input
+		Scanner userInput=new Scanner(System.in);
 	    boolean done=true;
 	    Spreadsheet grid=new Spreadsheet();
 	    while(done) {
-        	String input=userInput.nextLine();
-        	if(input.equals("quit")){
+        	//reiterates input until the user says to quit
+	    	String input=userInput.nextLine();
+        	if(input.toLowerCase().equals("quit")){
         		done=false;
         	}else{
         		System.out.println(grid.processCommand(input));

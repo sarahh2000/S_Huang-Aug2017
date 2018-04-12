@@ -4,6 +4,7 @@
 package textExcel;
 
 public class ValueCell extends RealCell{
+	//constructor for value cell
 	public ValueCell(String cellText) {
 		super(cellText);
 	}

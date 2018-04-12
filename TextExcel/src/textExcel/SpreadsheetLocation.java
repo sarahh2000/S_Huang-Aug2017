@@ -9,15 +9,18 @@ public class SpreadsheetLocation implements Location
     
     public int getRow()
     {
-        return num-1;
+    	//bc array index
+    	return num-1;
     }
 
     public int getCol()
     {
-       return character-65;
+       //bc capital letters
+    	return character-65;
     }
-    
+    //constructor for spreadsheet location
     public SpreadsheetLocation(String place) {
+    	//change to uppercase
     	String letter=place.substring(0,1).toUpperCase();
     	character=letter.charAt(0);
     	num=Integer.parseInt(place.substring(1));

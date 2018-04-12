@@ -4,6 +4,7 @@
 package textExcel;
 
 public class RealCell implements Cell {
+	//constructor for realcell
 	private String cellText;
 	public RealCell(String cellText) {
 		this.cellText=cellText;
@@ -12,6 +13,7 @@ public class RealCell implements Cell {
 	public String abbreviatedCellText() {
 		String doubleValue=getDoubleValue()+"";
 		String result=doubleValue;
+		//pad text if not 10 characters
 		if(doubleValue.length()<10) {
 			for(int i=0; i<10-doubleValue.length();i++) {
 				result+=" ";
